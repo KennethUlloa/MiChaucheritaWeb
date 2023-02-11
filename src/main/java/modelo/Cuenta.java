@@ -31,6 +31,8 @@ abstract class Cuenta implements Serializable{
 		return nombreCuenta;
 	}
 	
+	
+	
 	abstract double getMonto();
 	abstract void registrarEgreso(double valor);
 	abstract void registrarIngreso(double valor);
