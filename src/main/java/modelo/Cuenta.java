@@ -2,7 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 
-abstract class Cuenta implements Serializable{
+public abstract class Cuenta implements Serializable{
 
 	/**
 	 * 
@@ -18,7 +18,6 @@ abstract class Cuenta implements Serializable{
 	}
 
 	public Cuenta(int numeroCuenta, String nombreCuenta) {
-		super();
 		this.numeroCuenta = numeroCuenta;
 		this.nombreCuenta = nombreCuenta;
 	}
@@ -31,16 +30,8 @@ abstract class Cuenta implements Serializable{
 		return nombreCuenta;
 	}
 	
-	
-	
-	abstract double getMonto();
-	abstract void registrarEgreso(double valor);
-	abstract void registrarIngreso(double valor);
-	
-
-
-	
-	
-	
+	abstract public double getMonto();
+	abstract public void registrarEgreso(double valor);
+	abstract public void registrarIngreso(double valor);
 	
 }

@@ -2,22 +2,32 @@ package modelo;
 
 public class CuentaEgresos extends Cuenta {
 	private double egresos;
-	@Override
-	double getMonto() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public CuentaEgresos() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CuentaEgresos(int numeroCuenta, String nombreCuenta) {
+		super(numeroCuenta, nombreCuenta);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	void registrarEgreso(double valor) {
+	public double getMonto() {
 		// TODO Auto-generated method stub
+		return egresos;
+	}
+
+	@Override
+	public void registrarEgreso(double valor) {
+		egresos += valor;
 		
 	}
 
 	@Override
-	void registrarIngreso(double valor) {
-		// TODO Auto-generated method stub
-		
+	public void registrarIngreso(double valor) {
+		egresos += valor;
 	}
 
 }

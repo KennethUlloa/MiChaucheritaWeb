@@ -2,23 +2,33 @@ package modelo;
 
 public class CuentaIngresos extends Cuenta {
 	private double ingresos;
+	
+	
 
-	@Override
-	double getMonto() {
-		// TODO Auto-generated method stub
-		return 0;
+	public CuentaIngresos() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CuentaIngresos(int numeroCuenta, String nombreCuenta) {
+		super(numeroCuenta, nombreCuenta);
 	}
 
 	@Override
-	void registrarEgreso(double valor) {
+	public double getMonto() {
 		// TODO Auto-generated method stub
+		return ingresos;
+	}
+
+	@Override
+	public void registrarEgreso(double valor) {
+		ingresos += valor;
 		
 	}
 
 	@Override
-	void registrarIngreso(double valor) {
-		// TODO Auto-generated method stub
-		
+	public void registrarIngreso(double valor) {
+		ingresos += valor;
 	}
 	
 	
