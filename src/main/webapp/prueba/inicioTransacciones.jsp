@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="prueba/estilo.css" media="all" />
 </head>
 <body>
-	<a href="index.html">Regresar</a>
+	<a href="inicio">Regresar</a>
 	<h1>Transacciones</h1>
 	<h2>Movimientos</h2>
 	<form action="GestionarMovimientosController?ruta=listarTransaccion" method="post">
@@ -49,13 +49,13 @@
 		<fieldset>
 			<label for="cuentaOrigen">Cuenta Origen: </label>
 			<select name="cuentaOrigen" required>
-				<c:forEach items="${cuentas}" var="cuenta">
+				<c:forEach items="${cuentasOrigen}" var="cuenta">
 					<option value="${cuenta.numeroCuenta}">${cuenta.nombreCuenta}</option>
 				</c:forEach>
 			</select><br />
 			<label for="cuentaDestino">Cuenta Destino: </label>
 			<select name="cuentaDestino" required>
-				<c:forEach items="${cuentas}" var="cuenta">
+				<c:forEach items="${cuentasDestino}" var="cuenta">
 					<option value="${cuenta.numeroCuenta}">${cuenta.nombreCuenta}</option>
 				</c:forEach>
 			</select><br />

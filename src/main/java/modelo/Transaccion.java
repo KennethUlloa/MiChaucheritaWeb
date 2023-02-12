@@ -65,4 +65,18 @@ public class Transaccion implements Serializable{
 		this.fecha = fecha;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "{\"cuentaOrigen\":" + this.getOrigen()
+				+ ",\"cuentaDestino\":" + this.getDestino()
+				+ ",\"concepto\":\"" + this.getConcepto()
+				+ "\",\"monto\":" + this.getMonto()
+				+ ",\"fecha\":\"" + this.getFecha()
+				+ "\"}";
+	}
+	
+	
+
 }

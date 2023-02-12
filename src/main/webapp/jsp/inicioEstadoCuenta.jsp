@@ -40,7 +40,7 @@
     <br>
     <div class="headerEC">
         <h2 class="center"> Estado de Cuenta</h2>
-        <a href="index.html">Regresar</a>
+        <a href="/inicio">Regresar</a>
     </div>
     <br>
     
@@ -79,7 +79,7 @@
             <c:forEach items="${estadoCuenta.cuentasIngresos}" var="cuenta">
 				<div>
                     <h3>${cuenta.nombreCuenta}</h3>
-                    <p>Total: -$${cuenta.monto}</p>
+                    <p>Total: $${cuenta.monto}</p>
                 </div>                 
             </c:forEach>
             </div>       

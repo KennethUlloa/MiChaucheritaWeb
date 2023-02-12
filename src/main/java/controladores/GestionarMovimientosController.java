@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.Cuenta;
 import modelo.CuentaDAO;
+import modelo.CuentaEgresos;
+import modelo.CuentaIngresos;
 import modelo.Transaccion;
 import modelo.TransaccionDAO;
 
@@ -62,6 +64,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		String concepto = request.getParameter("concepto");
 		double montoNumerico = Double.parseDouble(monto);
 		String fecha = request.getParameter("fecha");
+		boolean useApi = request.getParameter("usarApi") != null;
 		//2. Llamar al modelo
 		CuentaDAO modeloCuenta = new CuentaDAO();
 		Cuenta origen = modeloCuenta.getCuenta(Integer.parseInt(cuentaOrigen));
@@ -75,6 +78,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		transaccion.setMonto(montoNumerico);
 		transaccion.setConcepto(concepto);
 		transaccion.setFecha(LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		
 		modeloTransaccion.registrarTransaccion(transaccion);
 		//3. Llamar a la vista
 		response.sendRedirect("GestionarMovimientosController");
@@ -97,7 +101,23 @@ public class GestionarMovimientosController extends HttpServlet {
 		
 		CuentaDAO modeloCuenta = new CuentaDAO();
 		List<Cuenta> cuentas = modeloCuenta.getCuentas();
-		request.setAttribute("cuentas", cuentas);
+		
+		List<Cuenta> cuentasOrigen = new ArrayList<>();
+		List<Cuenta> cuentasDestino = new ArrayList<>();
+		
+		for(Cuenta c: cuentas) {
+			if(c instanceof CuentaIngresos) {
+				cuentasOrigen.add(c);
+			}else if(c instanceof CuentaEgresos) {
+				cuentasDestino.add(c);
+			}else {
+				cuentasOrigen.add(c);
+				cuentasDestino.add(c);
+			}
+		}
+		
+		request.setAttribute("cuentasOrigen", cuentasOrigen);
+		request.setAttribute("cuentasDestino", cuentasDestino);
 		request.setAttribute("transacciones", transacciones);
 		request.getRequestDispatcher("prueba/inicioTransacciones.jsp").forward(request, response);
 	}
