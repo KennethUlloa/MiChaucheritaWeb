@@ -99,7 +99,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		List<Cuenta> cuentas = modeloCuenta.getCuentas();
 		request.setAttribute("cuentas", cuentas);
 		request.setAttribute("transacciones", transacciones);
-		request.getRequestDispatcher("prueba/inicioTransacciones.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/inicioTransaccion.jsp").forward(request, response);
 	}
 
 }
