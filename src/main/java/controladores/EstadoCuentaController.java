@@ -3,12 +3,17 @@ package controladores;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import modelo.EstadoCuenta;
+import modelo.Transaccion;
+import modelo.TransaccionDAO;
 
 /**
  * Servlet implementation class EstadoCuentaController
@@ -46,9 +51,7 @@ public class EstadoCuentaController extends HttpServlet {
 		//1. Obtener valores
 		//2. Llamar al modelo
 		//3. LLamar a la vista
-		/* request.setAttribute("estadoCuenta", null);
-		 * request.getRequestDispatcher("prueba/inicioEstadoCuenta.jsp").forward(request, response);
-		 */
+		request.setAttribute("estadoCuenta", null);
 		request.getRequestDispatcher("prueba/inicioEstadoCuenta.jsp").forward(request, response);
 		
 	}
@@ -56,23 +59,19 @@ public class EstadoCuentaController extends HttpServlet {
 		//1. Obtener valores
 		String fechaInicioStr = request.getParameter("fechaInicial");
 		String fechaFinalStr = request.getParameter("fechaFinal");
-		System.out.println(fechaInicioStr);
-		//LocalDate fechaInicio = LocalDate.parse(fechaInicioStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		//LocalDate fechaFinal = LocalDate.parse(fechaFinalStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		LocalDate fechaInicio = LocalDate.parse(fechaInicioStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate fechaFinal = LocalDate.parse(fechaFinalStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		//2. Llamar al modelo
-		/*
-		 * TransaccionDAO modeloTransaccion = new TransaccionDAO();
-		 * List<Transaccion> transacciones = modeloTransaccion.getTransacciones(fechaInicio, fechaFinal);
-		 * EstadoCuenta estadoCuenta = new EstadoCuenta(transacciones);
-		 */
+		
+		TransaccionDAO modeloTransaccion = new TransaccionDAO();
+		List<Transaccion> transacciones = modeloTransaccion.getTransacciones(fechaInicio, fechaFinal);
+		System.out.println(transacciones);
+		EstadoCuenta estadoCuenta = new EstadoCuenta(transacciones);
+		System.out.println(estadoCuenta); 
 		//3. LLamar a la vista
-		/*
-		 * request.setAttribute("estadoCuenta", estadoCuenta);
-		 * request.getRequestDispatcher("prueba/inicioEstadoCuenta.jsp").forward(request, response);
-		 */
-		request.setAttribute("fechaInicial", fechaInicioStr);
-		request.setAttribute("fechaFinal", fechaFinalStr);
-		request.setAttribute("show", true);
+		
+		request.setAttribute("estadoCuenta", estadoCuenta);
 		request.getRequestDispatcher("prueba/inicioEstadoCuenta.jsp").forward(request, response);
 	}
 

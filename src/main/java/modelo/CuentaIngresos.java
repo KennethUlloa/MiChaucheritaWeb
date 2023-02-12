@@ -30,6 +30,11 @@ public class CuentaIngresos extends Cuenta {
 	public void registrarIngreso(double valor) {
 		ingresos += valor;
 	}
+
+	@Override
+	public String toString() {
+		return getNombreCuenta() + " [ingresos=" + ingresos + "]";
+	}
 	
 	
 	

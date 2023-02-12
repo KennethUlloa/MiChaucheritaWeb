@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CuentaDAO {
-	private static List<Cuenta> cuentas=null;
+	private static List<Cuenta> cuentas = null;
 	
 	public Cuenta getCuenta(int id) {
-		for (Cuenta cuenta : cuentas) {
+		for (Cuenta cuenta : getCuentas()) {
 			if(cuenta.getNumeroCuenta()==id) {
 				return cuenta;
 			}
@@ -16,7 +16,7 @@ public class CuentaDAO {
 	}
 
 	public List<Cuenta> getCuentas() {
-		if(cuentas==null) {
+		if(cuentas == null) {
 			cuentas = new ArrayList<Cuenta>();
 			cuentas.add(new CuentaIngresos(1,"Nómina"));
 			cuentas.add(new CuentaEgresos(2,"Regalo"));

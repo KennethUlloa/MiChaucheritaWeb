@@ -64,12 +64,14 @@ public class GestionarMovimientosController extends HttpServlet {
 	}
 	
 	private void registrarTransaccion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. Recibir datos
 		String cuentaOrigen = request.getParameter("cuentaOrigen");
 		String cuentaDestino = request.getParameter("cuentaDestino");
 		String monto = request.getParameter("monto");
 		String concepto = request.getParameter("concepto");
 		double montoNumerico = Double.parseDouble(monto);
-		
+		String fecha = request.getParameter("fecha");
+		//2. Llamar al modelo
 		CuentaDAO modeloCuenta = new CuentaDAO();
 		Cuenta origen = modeloCuenta.getCuenta(Integer.parseInt(cuentaOrigen));
 		origen.registrarEgreso(montoNumerico);
@@ -81,9 +83,9 @@ public class GestionarMovimientosController extends HttpServlet {
 		transaccion.setDestino(destino);
 		transaccion.setMonto(montoNumerico);
 		transaccion.setConcepto(concepto);
-		transaccion.setFecha(LocalDate.now());
+		transaccion.setFecha(LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		modeloTransaccion.registrarTransaccion(transaccion);
-		
+		//3. Llamar a la vista
 		response.sendRedirect("GestionarMovimientosController");
 		
 		

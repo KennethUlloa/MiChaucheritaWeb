@@ -12,10 +12,29 @@ public class TransaccionDAO {
 	}
 	
 	public List<Transaccion> getTransacciones() {
+		
 		if(transacciones == null) {
 			transacciones = new ArrayList<>();
+			//1 - 3 Nomina a banco
+			transacciones.add(realizarTransaccion(1,3,1000,"Pago de nómina de mi trabajo", LocalDate.of(2022, 12, 31)));
+			//3 - 4 Banco a Universidad
+			transacciones.add(realizarTransaccion(3,5,100,"Libro \"Contabilidad básica\"", LocalDate.of(2023, 1, 16)));
+			//3 - 4 Banco a Efectivo
+			transacciones.add(realizarTransaccion(3,4,400,"Traspaso entre cuentas", LocalDate.of(2023, 1, 20)));
+			//4 - 2 Efectivo a regalo
+			transacciones.add(realizarTransaccion(4,2,350,"Teléfono Celular para mamá", LocalDate.of(2023, 1, 20)));
 		}
 		return transacciones;
+	}
+	
+	private Transaccion realizarTransaccion(int origen, int destino, double monto, String concepto, LocalDate fecha) {
+		CuentaDAO modeloCuenta = new CuentaDAO();
+		Cuenta origenC = modeloCuenta.getCuenta(origen);
+		origenC.registrarEgreso(monto);
+		Cuenta destinoC = modeloCuenta.getCuenta(destino);
+		destinoC.registrarIngreso(monto);
+		return new Transaccion(0, origenC, destinoC, concepto, monto,fecha);
+		
 	}
 	
 	public List<Transaccion> getTransacciones(LocalDate inicio, LocalDate fin) {

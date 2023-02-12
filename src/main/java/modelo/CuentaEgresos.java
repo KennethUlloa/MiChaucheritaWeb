@@ -30,4 +30,11 @@ public class CuentaEgresos extends Cuenta {
 		egresos += valor;
 	}
 
+	@Override
+	public String toString() {
+		return getNombreCuenta() + " [egresos=" + egresos + "]";
+	}
+	
+	
+
 }

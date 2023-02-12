@@ -21,15 +21,23 @@ public abstract class Cuenta implements Serializable{
 		this.numeroCuenta = numeroCuenta;
 		this.nombreCuenta = nombreCuenta;
 	}
-
+	
 	public int getNumeroCuenta() {
 		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
 	}
 
 	public String getNombreCuenta() {
 		return nombreCuenta;
 	}
-	
+
+	public void setNombreCuenta(String nombreCuenta) {
+		this.nombreCuenta = nombreCuenta;
+	}
+
 	abstract public double getMonto();
 	abstract public void registrarEgreso(double valor);
 	abstract public void registrarIngreso(double valor);
