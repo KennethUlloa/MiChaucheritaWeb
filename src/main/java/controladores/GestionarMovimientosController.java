@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -66,6 +67,17 @@ public class GestionarMovimientosController extends HttpServlet {
 		String fecha = request.getParameter("fecha");
 		boolean useApi = request.getParameter("usarApi") != null;
 		//2. Llamar al modelo
+		if(montoNumerico <= 0) {
+			if(useApi) {
+				response.setCharacterEncoding("UTF-8");
+				response.sendError(400, "No se permiten montos negativos");
+			}else {
+				response.sendRedirect("GestionarMovimientosController?ruta=listarTransaccion&");
+			}
+		}
+		
+		
+		
 		CuentaDAO modeloCuenta = new CuentaDAO();
 		Cuenta origen = modeloCuenta.getCuenta(Integer.parseInt(cuentaOrigen));
 		origen.registrarEgreso(montoNumerico);
