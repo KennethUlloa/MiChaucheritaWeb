@@ -52,7 +52,7 @@ public class EstadoCuentaController extends HttpServlet {
 		//2. Llamar al modelo
 		//3. LLamar a la vista
 		request.setAttribute("estadoCuenta", null);
-		request.getRequestDispatcher("prueba/inicioEstadoCuenta.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/inicioEstadoCuenta.jsp").forward(request, response);
 		
 	}
 	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,7 +72,7 @@ public class EstadoCuentaController extends HttpServlet {
 		//3. LLamar a la vista
 		
 		request.setAttribute("estadoCuenta", estadoCuenta);
-		request.getRequestDispatcher("prueba/inicioEstadoCuenta.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/inicioEstadoCuenta.jsp").forward(request, response);
 	}
 
 }
