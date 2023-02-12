@@ -60,7 +60,7 @@
 				</c:forEach>
 			</select><br />
 			<label for="monto">Monto: </label>
-			<input type="number" name="monto" id="" required/><br />
+			<input type="number" name="monto" id="" min="0" required/><br />
 			<label for="concepto">Concepto: </label>
 			<input type="text" name="concepto" id="" required/><br />
 			<label for="fecha">Fecha: </label>

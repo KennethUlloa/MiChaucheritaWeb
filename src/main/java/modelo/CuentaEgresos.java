@@ -1,6 +1,10 @@
 package modelo;
 
 public class CuentaEgresos extends Cuenta {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double egresos;
 	
 	public CuentaEgresos() {
@@ -16,7 +20,7 @@ public class CuentaEgresos extends Cuenta {
 	@Override
 	public double getMonto() {
 		// TODO Auto-generated method stub
-		return egresos;
+		return -egresos;
 	}
 
 	@Override
@@ -29,12 +33,5 @@ public class CuentaEgresos extends Cuenta {
 	public void registrarIngreso(double valor) {
 		egresos += valor;
 	}
-
-	@Override
-	public String toString() {
-		return getNombreCuenta() + " [egresos=" + egresos + "]";
-	}
 	
-	
-
 }

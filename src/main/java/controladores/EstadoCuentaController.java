@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -59,6 +60,7 @@ public class EstadoCuentaController extends HttpServlet {
 		//1. Obtener valores
 		String fechaInicioStr = request.getParameter("fechaInicial");
 		String fechaFinalStr = request.getParameter("fechaFinal");
+		boolean useApi = request.getParameter("usarApi") != null;
 		
 		LocalDate fechaInicio = LocalDate.parse(fechaInicioStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate fechaFinal = LocalDate.parse(fechaFinalStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -66,13 +68,16 @@ public class EstadoCuentaController extends HttpServlet {
 		
 		TransaccionDAO modeloTransaccion = new TransaccionDAO();
 		List<Transaccion> transacciones = modeloTransaccion.getTransacciones(fechaInicio, fechaFinal);
-		System.out.println(transacciones);
 		EstadoCuenta estadoCuenta = new EstadoCuenta(transacciones);
-		System.out.println(estadoCuenta); 
 		//3. LLamar a la vista
-		
-		request.setAttribute("estadoCuenta", estadoCuenta);
-		request.getRequestDispatcher("jsp/inicioEstadoCuenta.jsp").forward(request, response);
+		if(useApi) {
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(estadoCuenta);
+		}else {
+			request.setAttribute("estadoCuenta", estadoCuenta);
+			request.getRequestDispatcher("jsp/inicioEstadoCuenta.jsp").forward(request, response);
+		}
 	}
 
 }

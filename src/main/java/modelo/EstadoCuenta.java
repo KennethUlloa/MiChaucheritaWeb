@@ -88,8 +88,8 @@ public class EstadoCuenta implements Serializable{
 
 	@Override
 	public String toString() {
-		return "EstadoCuenta [cuentasIngresos=" + cuentasIngresos + ", cuentasEgresos=" + cuentasEgresos
-				+ ", cuentasIngresoEgreso=" + cuentasIngresoEgreso + "]";
+		return "{\"cuentasIngresos\":" + cuentasIngresos + ", \"cuentasEgresos\":" + cuentasEgresos
+				+ ", \"cuentasIngresoEgreso\":" + cuentasIngresoEgreso + "}";
 	}
 	
 

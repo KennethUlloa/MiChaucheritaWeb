@@ -43,8 +43,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, voluptas provident!
             Corrupti mollitia veritatis, pariatur eligendi autem rerum ipsum facere temporibus adipisci aut maxime
             necessitatibus officiis alias vel tenetur odio?</p>
-        <p>Grupo 2 | Proyecti Mi Chaucherita WEB | <a href="https://www.epn.edu.ec">Escuela Politécnica
-                Nacional</a></p>
+        <p>Grupo 2 | Proyecto Mi Chaucherita WEB | <a href="https://www.epn.edu.ec">Escuela Politécnica Nacional</a></p>
     </div>
 
 </body>

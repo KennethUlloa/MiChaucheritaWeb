@@ -31,10 +31,4 @@ public class CuentaIngresoEgreso extends Cuenta{
 		ingresos += valor;
 	}
 
-	@Override
-	public String toString() {
-		return getNombreCuenta() + " [egresos=" + egresos + ", ingresos=" + ingresos + "]";
-	}
-	
-	
 }

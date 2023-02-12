@@ -1,6 +1,10 @@
 package modelo;
 
 public class CuentaIngresos extends Cuenta {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double ingresos;
 	
 	
@@ -30,13 +34,5 @@ public class CuentaIngresos extends Cuenta {
 	public void registrarIngreso(double valor) {
 		ingresos += valor;
 	}
-
-	@Override
-	public String toString() {
-		return getNombreCuenta() + " [ingresos=" + ingresos + "]";
-	}
-	
-	
-	
 	
 }
