@@ -72,11 +72,11 @@ public class GestionarMovimientosController extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				response.sendError(400, "No se permiten montos negativos");
 			}else {
-				response.sendRedirect("GestionarMovimientosController?ruta=listarTransaccion&");
+				request.setAttribute("error", "No se permiten montos negativos");
+				listarTransacciones(request, response);
 			}
+			return;
 		}
-		
-		
 		
 		CuentaDAO modeloCuenta = new CuentaDAO();
 		Cuenta origen = modeloCuenta.getCuenta(Integer.parseInt(cuentaOrigen));
@@ -90,16 +90,21 @@ public class GestionarMovimientosController extends HttpServlet {
 		transaccion.setMonto(montoNumerico);
 		transaccion.setConcepto(concepto);
 		transaccion.setFecha(LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-		
 		modeloTransaccion.registrarTransaccion(transaccion);
 		//3. Llamar a la vista
-		response.sendRedirect("GestionarMovimientosController");
+		if(useApi) {
+			response.sendRedirect("GestionarMovimientosController?usarApi=1");
+		}else {
+			response.sendRedirect("GestionarMovimientosController");
+		}
+		
 		
 		
 	}
 	private void listarTransacciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fechaInicioStr = request.getParameter("fechaInicial");
 		String fechaFinalStr = request.getParameter("fechaFinal");
+		boolean useApi = request.getParameter("usarApi") != null;
 		
 		TransaccionDAO modeloTransaccion = new TransaccionDAO();
 		List<Transaccion> transacciones = new ArrayList<>();
@@ -128,10 +133,17 @@ public class GestionarMovimientosController extends HttpServlet {
 			}
 		}
 		
+		if(useApi) {
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().print(transacciones);
+			System.out.println(transacciones);
+			return;
+		}
+				
 		request.setAttribute("cuentasOrigen", cuentasOrigen);
 		request.setAttribute("cuentasDestino", cuentasDestino);
 		request.setAttribute("transacciones", transacciones);
-		request.getRequestDispatcher("prueba/inicioTransacciones.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/inicioTransacciones.jsp").forward(request, response);
 	}
 
 }

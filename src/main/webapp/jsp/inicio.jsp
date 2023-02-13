@@ -5,46 +5,47 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="css/style.css" media="all" />
+<link rel="stylesheet" href="css/base.css" media="all" />
+<link rel="stylesheet" href="css/inicio.css" media="all" />
+<link rel="stylesheet" href="css/lib.css" media="all" />
 <title>Inicio</title>
 </head>
 <body>
-    <div>
-        <h1 class="center">Mi Chaucherita WEB</h1>
-    </div>
-        
-    <div class="container">
-        <div class="card">
-            <div class="titulo_item">Transacciones</div>
-            <a href="GestionarMovimientosController"><div class="imgContenedor"><img src="img/transaccion2.jpg" alt="transaccion"></div></a>
-            </br>
-            <div class="descripcion">
-                <div>En este apartado será capaz de realizar una transacción hacia cualquier cuenta que desee.
-                    Además, podrá ver el historial de las transacciones realizadas por mes o una fecha específica.
-                </div>
-            </div>
-            </br>
-        </div>
-        <div class="card">
-            <div class="titulo_item">Estado de Cuenta</div>
-            <a href="EstadoCuentaController"><div class="imgContenedor"><img src="img/estadoCuenta.jpg" alt="transaccion"></div></a>
-            </br>
-            <div class="descripcion">
-                <div>En este apartado será capaz de realizar una transacción hacia cualquier cuenta que desee.
-                    Además, podrá ver el historial de las transacciones realizadas por mes o una fecha específica.
-                </div>
-            </div>
-            </br>
-        </div>
-    </div>
-
-    <div id="footer">
+    <header>
+		<h1 class="my-5">Mi Chaucherita Web</h1>
+	</header>
+	<main class="w-100 flex-column ai-center mb-5">
+		<div class="col-2 w-fit">
+	        <div class="card shadow">
+	        	<h2 class="m-1">Transacciones</h2>
+	        	<div class="card-icon">
+		        	<a href="GestionarMovimientosController">
+		        		<img src="img/transaccion2.jpg" alt="transaccion">
+		        	</a>
+	        	</div>
+	        	<p class="txt-justify">En este apartado será capaz de realizar una transacción hacia cualquier cuenta que desee.
+	               Además, podrá ver el historial de las transacciones realizadas por mes o una fecha específica.</p>
+	        </div>
+	        <div class="card shadow">
+	            <h2 class="m-1">Estado de Cuenta</h2>
+	            <div class="card-icon">
+	            	<a href="EstadoCuentaController">
+	            		<img src="img/estadoCuenta.jpg" alt="transaccion">
+	            	</a>
+	            </div>
+	            <p class="txt-justify">En este apartado será capaz de realizar una transacción hacia cualquier cuenta que desee.
+	            Además, podrá ver el historial de las transacciones realizadas por mes o una fecha específica.</p>
+	        </div>
+    	</div>
+	</main>       
+    <footer id="footer" class="p-5">
         <h3>Terminos y Condiciones</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, voluptas provident!
+        <p class="my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, voluptas provident!
             Corrupti mollitia veritatis, pariatur eligendi autem rerum ipsum facere temporibus adipisci aut maxime
             necessitatibus officiis alias vel tenetur odio?</p>
-        <p>Grupo 2 | Proyecto Mi Chaucherita WEB | <a href="https://www.epn.edu.ec">Escuela Politécnica Nacional</a></p>
-    </div>
+        <p>Grupo 2 | Proyecti Mi Chaucherita WEB | <a href="https://www.epn.edu.ec" class="txt-color-white txt-plain">Escuela Politécnica
+                Nacional</a></p>
+    </footer>
 
 </body>
 </html>

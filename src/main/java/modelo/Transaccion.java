@@ -69,12 +69,13 @@ public class Transaccion implements Serializable{
 
 	@Override
 	public String toString() {
-		return "{\"cuentaOrigen\":" + this.getOrigen()
-				+ ",\"cuentaDestino\":" + this.getDestino()
-				+ ",\"concepto\":\"" + this.getConcepto()
-				+ "\",\"monto\":" + this.getMonto()
-				+ ",\"fecha\":\"" + this.getFecha()
-				+ "\"}";
+		return "{\"id\":" + this.getId() + ","
+				+ "\"origen\":" + this.getOrigen() + ","
+				+ "\"destino\":" + this.getDestino() + ","
+				+ "\"concepto\":\"" + this.getConcepto().replace("\"", "\\\"") +"\","
+				+ "\"monto\":" + this.getMonto() +","
+				+ "\"fecha\":\"" + this.getFecha() +"\""
+				+ "}";
 	}
 	
 	

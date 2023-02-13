@@ -1,9 +1,8 @@
-@charset "ISO-8859-1";
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0px auto;
 }
-/*Contenainer del menú de opciones*/
+/*Contenainer del menï¿½ de opciones*/
 .container{
     display: flex;
     flex-direction: row;
@@ -19,7 +18,7 @@ body{
     text-align: center;
     margin: 0 10px;
 }
-/*texto descriptivo de la opción*/
+/*texto descriptivo de la opciï¿½n*/
 .descripcion{
     text-align: justify;
     padding: 0 15px;
@@ -61,7 +60,7 @@ body{
 }
 
 /*Footer*/
-#footer{
+footer{
     background: #000000;
     color: #ddd;
     height: 200px;

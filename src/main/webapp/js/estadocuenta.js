@@ -3,7 +3,6 @@ let monthElement = form.elements["mes"];
 let yearElement = form.elements["anio"];
 var currDate = new Date();
 
-
 function getDateRange(month, year) {
 	var startDate = new Date(year, month-1, 1);
 	var endDate = new Date(year, month, 0);
@@ -18,6 +17,7 @@ function formatter(date) {
 	var day = date.getDate();
 	return `${date.getFullYear()}-${(month <= 9)? "0"+month: month}-${(day <= 9)? "0"+day: day}`;
 }
+
 
 for(var i = 1900; i <= currDate.getFullYear(); i++) {
 	var option = document.createElement("option");
