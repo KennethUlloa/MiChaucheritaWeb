@@ -86,7 +86,7 @@
                         </div>
                         <div class="m-1">
                             <label for="monto">Monto: </label>
-                            <input type="number" name="monto" id="" min="0" required placeholder="Ej: 150.35"/>
+                            <input type="number" name="monto" id="" min="0.0" step="0.01" required placeholder="Ej: 150.35"/>
                         </div>
                         <div class="m-1">
                             <label for="fecha">Fecha: </label>
