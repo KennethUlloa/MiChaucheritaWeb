@@ -8,10 +8,12 @@
 <link rel="stylesheet" href="css/base.css" media="all" />
 <link rel="stylesheet" href="css/lib.css" media="all" />
 <link rel="stylesheet" href="css/estadocuenta.css" media="all" />
+<link rel="icon" href="icon.png" type="image/png">
 <title>Estado de cuenta</title>
 </head>
 <body>
-	<header>
+	<header class="flex-row jc-center ai-center">
+    	<img src="icon.png" alt="logo" class="logo mr-2"/>
 		<h1 class="my-5">Mi Chaucherita Web</h1>
 	</header>
 	<main class="w-100 flex-column ai-center">
@@ -43,7 +45,7 @@
 		<div class="col-3 container-cuentas">
 	        <div class="br-gray m-3 p-3 rounded-1 shadow">
 	            <h2 class="jc-center flex-row">Cuentas de Entrada y Salida</h2>
-	            <hr />
+	            <hr class="mb-3"/>
 	            <div class="descripcion" id="cuentasIngresoEgreso">
 	            <c:forEach items="${estadoCuenta.cuentasIngresoEgreso}" var="cuenta">
 	                <div>
@@ -56,7 +58,7 @@
 	    
 	        <div class="br-gray m-3 p-3 rounded-1 shadow">
 	            <h2 class="jc-center flex-row">Cuentas de Gastos</h2>
-	            <hr />
+	            <hr class="mb-3"/>
 	            <div class="descripcion" id="cuentasEgresos">
 	            <c:forEach items="${estadoCuenta.cuentasEgresos}" var="cuenta">
 	                <div>
@@ -69,7 +71,7 @@
 	
 	        <div class="br-gray m-3 p-3 rounded-1 shadow">
 				<h2 class="jc-center flex-row">Cuentas de Ingreso</h2>
-	            <hr />
+	            <hr class="mb-3"/>
 	            <div class="descripcion" id="cuentasIngresos">
 	            <c:forEach items="${estadoCuenta.cuentasIngresos}" var="cuenta">
 					<div>

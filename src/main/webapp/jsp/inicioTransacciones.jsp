@@ -10,14 +10,17 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/lib.css" />
     <link rel="stylesheet" href="css/transacciones-home.css" />
-    <title>Transacciones</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <title>Movimientos</title>
+    
 </head>
 
 <body class="p-relative">
 	
-    <header>
-        <h1 class="my-5">Mi Chaucherita Web</h1>
-    </header>
+    <header class="flex-row jc-center ai-center">
+    	<img src="icon.png" alt="logo" class="logo mr-2"/>
+		<h1 class="my-5">Mi Chaucherita Web</h1>
+	</header>
     <main class="w-100 flex-column ai-center px-4 mb-4">
         <div class="br-gray rounded-1 p-3 m-3 shadow w-100">
             <h2 class="mb-2">Consultar movimientos</h2>
@@ -32,7 +35,7 @@
         <div class="br-gray rounded-1 p-3 shadow flex-column w-100" id="table-transaccion">
             
             <div>
-                <h2 class="mb-2">Transacciones</h2> 
+                <h2 class="mb-2">Movimientos realizados entre cuentas</h2> 
                 <button class="btn my-2 action-btn" id="btn-realizar-mov" onclick="showInputDialog()">Realizar movimiento</button>
             </div>
             <table cellspacing="0" class="w-100" id="table-transacciones">
@@ -62,7 +65,7 @@
 
     <div class="popup-layer hidden" id="popup-layer">
         <div class="br-gray rounded-1 p-3 m-3 shadow flex-column w-fit bg-white ai-center">
-            <h2 class="mb-2">Realizar transacción</h2>
+            <h2 class="mb-2">Realizar movimiento</h2>
             <form action="GestionarMovimientosController?ruta=registroTransaccion&usarApi=1" method="post" class="w-fit" id="form-transaccion">
                     <div class="w-fit flex-column ai-center">
                         <div class="m-1">
