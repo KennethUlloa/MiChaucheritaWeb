@@ -143,6 +143,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		request.setAttribute("cuentasOrigen", cuentasOrigen);
 		request.setAttribute("cuentasDestino", cuentasDestino);
 		request.setAttribute("transacciones", transacciones);
+
 		request.getRequestDispatcher("jsp/inicioTransacciones.jsp").forward(request, response);
 	}
 
