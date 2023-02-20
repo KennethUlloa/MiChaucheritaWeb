@@ -20,37 +20,43 @@ public class EstadoCuenta implements Serializable{
 	
 	public EstadoCuenta(List<Transaccion> transacciones) {
 		this();
+		//Estruturas donde se van a guardar las cuentas que obtenga
+		
 		HashMap<Integer, CuentaIngresos> mapCuentasIngresos = new HashMap<>();
 		HashMap<Integer, CuentaEgresos> mapCuentasEgresos = new HashMap<>();
+		CuentaIngresos cuentaIngreso = new CuentaIngresos();
+		CuentaEgresos cuentaEgreso = new CuentaEgresos();
+		List<Cuenta> cuentasExistentes = new CuentaDAO().getAll();
 		
 		//Cargar primero todas las cuentas existentes
-		for(Cuenta c : new CuentaDAO().getCuentas()) {
-			if(c instanceof CuentaIngresoEgreso) {
-				cuentasIngresoEgreso.add((CuentaIngresoEgreso) c);
+		for(Cuenta cuenta : cuentasExistentes ) {
+			
+			if(cuenta instanceof CuentaIngresoEgreso) {
+				cuentasIngresoEgreso.add((CuentaIngresoEgreso) cuenta);
 			}
-			if(c instanceof CuentaIngresos) { //Ingresos en cero dado que se van a calcular con las transacciones
-				CuentaIngresos cuenta = new CuentaIngresos();
-				cuenta.setNumeroCuenta(c.getNumeroCuenta());
-				cuenta.setNombreCuenta(c.getNombreCuenta());
-				mapCuentasIngresos.put(cuenta.getNumeroCuenta(),cuenta);
+			
+			if(cuenta instanceof CuentaIngresos) {
+				cuentaIngreso.setNumeroCuenta(cuenta.getNumeroCuenta());
+				cuentaIngreso.setNombreCuenta(cuenta.getNombreCuenta());
+				mapCuentasIngresos.put(cuentaIngreso.getNumeroCuenta(),cuentaIngreso);
 			}
-			if(c instanceof CuentaEgresos) {
-				CuentaEgresos cuenta = new CuentaEgresos();
-				cuenta.setNumeroCuenta(c.getNumeroCuenta());
-				cuenta.setNombreCuenta(c.getNombreCuenta());
-				mapCuentasEgresos.put(c.getNumeroCuenta(), cuenta);
+			
+			if(cuenta instanceof CuentaEgresos) {
+				cuentaEgreso.setNumeroCuenta(cuenta.getNumeroCuenta());
+				cuentaEgreso.setNombreCuenta(cuenta.getNombreCuenta());
+				mapCuentasEgresos.put(cuenta.getNumeroCuenta(), cuentaEgreso);
 			}
 		}
 		
-		//Para cada transaccion 
+		//Se realiza la sumarizacion de cada cuenta con la traccion registrada
 		for(Transaccion t : transacciones) {
-			Cuenta origen = mapCuentasIngresos.get(t.getOrigen().getNumeroCuenta());
-			Cuenta destino = mapCuentasEgresos.get(t.getDestino().getNumeroCuenta());
-			if(origen != null && !(origen instanceof CuentaIngresoEgreso)) {
-				origen.registrarEgreso(t.getMonto());
+			CuentaIngresos origen = mapCuentasIngresos.get(t.getOrigen().getNumeroCuenta());
+			CuentaEgresos destino = mapCuentasEgresos.get(t.getDestino().getNumeroCuenta());
+			if(origen != null) {
+				origen.registrarSalida(t.getMonto());
 			}
-			if(destino != null && !(destino instanceof CuentaIngresoEgreso)) {
-				destino.registrarIngreso(t.getMonto());
+			if(destino != null) {
+				destino.registrarEntrada(t.getMonto());
 			}
 			
 		}
