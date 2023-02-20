@@ -10,33 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class InicioController
  */
-@WebServlet("/inicio")
-public class InicioController extends HttpServlet {
+@WebServlet("/HomePageController")
+public class HomePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InicioController() {
+    public HomePageController() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("jsp/inicio.jsp").forward(request, response);
-		System.out.println("inicio");
+		procesar(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		procesar(request, response);
+	}
+	
+	private void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		mostrar(request, response);
+	}
+	
+	private void mostrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("jsp/inicio.jsp").forward(request, response);
 	}
 
 }

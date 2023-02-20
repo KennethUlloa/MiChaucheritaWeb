@@ -1,53 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="css/base.css" media="all" />
-<link rel="stylesheet" href="css/inicio.css" media="all" />
-<link rel="stylesheet" href="css/lib.css" media="all" />
-<link rel="icon" href="icon.png" type="image/png">
-<title>Inicio</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/icon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f9e2e8e2a6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/lib.css">
+    <link rel="stylesheet" href="css/inicio.css">
+    <title>Inicio</title>
 </head>
 <body>
-    <header class="flex-row jc-center ai-center">
-    	<img src="icon.png" alt="logo" class="logo mr-2"/>
-		<h1 class="my-5">Mi Chaucherita Web</h1>
-	</header>
-	<main class="w-100 flex-column ai-center mb-5">
-		<div class="col-2 w-fit">
-	        <div class="card shadow">
-	        	<h2 class="m-1">Movimientos</h2>
-	        	<div class="card-icon">
-		        	<a href="GestionarMovimientosController">
-		        		<img src="img/transaccion2.jpg" alt="transaccion">
-		        	</a>
-	        	</div>
-	        	<p class="txt-justify">En este apartado será capaz de realizar una transacción hacia cualquier cuenta que desee.
-	               Además, podrá ver el historial de las transacciones realizadas en un rango de fechas específico.</p>
-	        </div>
-	        <div class="card shadow">
-	            <h2 class="m-1">Estado de Cuenta</h2>
-	            <div class="card-icon">
-	            	<a href="EstadoCuentaController">
-	            		<img src="img/estadoCuenta.jpg" alt="transaccion">
-	            	</a>
-	            </div>
-	            <p class="txt-justify">En este apartado será capaz de generar el estado de cuenta de un mes y año específico. 
-	            Podrá revisar el estado actual de sus cuentas</p>
-	        </div>
-    	</div>
-	</main>       
-    <footer id="footer" class="p-5">
-        <h3>Terminos y Condiciones</h3>
-        <p class="my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, voluptas provident!
-            Corrupti mollitia veritatis, pariatur eligendi autem rerum ipsum facere temporibus adipisci aut maxime
-            necessitatibus officiis alias vel tenetur odio?</p>
-        <p>Grupo 2 | Proyecti Mi Chaucherita WEB | <a href="https://www.epn.edu.ec" class="txt-color-white txt-plain">Escuela Politécnica
-                Nacional</a></p>
-    </footer>
-
+    <header class="p-2 flex-row w-100 sp-between">
+        <div class="flex-row">
+            <div class="flex-row ai-center">
+                <img src="img/icon.png" alt="Logo Mi Chaucherita Web" class="min-logo mr-2" >
+                <h4 class="">Mi Chaucherita Web</h4>
+            </div>
+            <nav class="ml-2 flex-row">
+                <ul class="menu">
+                    <li class="selected"><a href="HomePageController">Inicio</a></li>
+                    <li><a href="GestionarMovimientosController">Movimientos</a></li>
+                    <li><a href="GestionarCuentasController">Cuentas</a></li>
+                    <li><a href="GestionarEstadoCuentaController">Estado de Cuenta</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="flex-row ai-center">
+            <h4 class="mr-2">Usuario</h4>     
+                <a href="login.html" class="">
+                    <i class="fa-solid fa-arrow-right-from-bracket fa-2xl c-darkgreen"></i>
+                </a>
+            </i>
+        </div>
+    </header>
 </body>
 </html>

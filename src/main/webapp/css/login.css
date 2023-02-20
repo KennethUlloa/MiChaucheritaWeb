@@ -1,0 +1,12 @@
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
