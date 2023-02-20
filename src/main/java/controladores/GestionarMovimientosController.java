@@ -19,6 +19,7 @@ import modelo.CuentaEgresos;
 import modelo.CuentaIngresos;
 import modelo.Transaccion;
 import modelo.TransaccionDAO;
+import utilities.JSON;
 
 @WebServlet("/GestionarMovimientosController")
 public class GestionarMovimientosController extends HttpServlet {
@@ -38,6 +39,11 @@ public class GestionarMovimientosController extends HttpServlet {
 	}
 	
 	private void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		VerificadorSesion verificador = new VerificadorSesion();
+		if(!verificador.verificarYRedirigir(request, response, "LogInController")) {
+			return;
+		}
+		
 		String accion = request.getParameter("accion");
 		if(accion == null) accion = "mostrar";
 		
@@ -63,7 +69,47 @@ public class GestionarMovimientosController extends HttpServlet {
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		JSON banco = new JSON();
+		banco.add("nombre", "Banco");
+		banco.add("tipo", "IE");
+		banco.add("monto", 500.0);
 		
+		JSON efectivo = new JSON();
+		efectivo.add("nombre", "Efectivo");
+		efectivo.add("tipo", "IE");
+		efectivo.add("monto", 50.0);
+		
+		JSON nomina = new JSON();
+		nomina.add("nombre", "Nómina");
+		nomina.add("tipo", "I");
+		nomina.add("monto", 1000.0);
+		
+		JSON regalo = new JSON();
+		regalo.add("nombre", "Regalo");
+		regalo.add("tipo", "E");
+		regalo.add("monto", -350.0);
+		
+		JSON t = new JSON();
+		t.add("origen", nomina);
+		t.add("destino", banco);
+		t.add("concepto", "Pago de rol");
+		t.add("monto", 1000);
+		t.add("fecha", "17-02-2022");
+		
+		JSON t2 = new JSON();
+		t2.add("origen", banco);
+		t2.add("destino", efectivo);
+		t2.add("concepto", "Retiro de dinero");
+		t2.add("monto", 400);
+		t2.add("fecha", "20-02-2022");
+		
+		List<JSON> transacciones = new ArrayList<>();
+		transacciones.add(t);
+		transacciones.add(t2);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().print(transacciones);
 	}
 
 }

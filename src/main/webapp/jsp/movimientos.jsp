@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,16 +31,16 @@
             </nav>
         </div>
         <div class="flex-row ai-center">
-            <h4 class="mr-2">Usuario</h4>     
-                <a href="login.html" class="">
+            <h4 class="mr-2">${sessionScope.usuario}</h4>     
+                <a href="LogOutController" class="">
                     <i class="fa-solid fa-arrow-right-from-bracket fa-2xl c-darkgreen"></i>
                 </a>
             </i>
         </div>
     </header>
     <main class="w-100 flex-column ai-center p-5">
-        <button class="btn m-2">+ Movimiento</button>
-        <form action="" class="shadow rounded-3 p-4 m-3">
+        <button class="btn m-2" onclick="mostrar()">+ Movimiento</button>
+        <form action="" method="post" class="shadow rounded-3 p-4 m-3 d-none" id="nuevoMovimientoForm">
             <div class="flex-row">
                 <div class="field mr-1">
                     <label for="monto">Monto</label>
@@ -66,10 +69,10 @@
             </div>
             <div class="flex-row jc-end mt-2">
                 <input type="submit" value="Guardar" class="btn mr-1">
-                <input type="button" value="Cancelar" class="btn secondary">
+                <input type="button" value="Cancelar" class="btn secondary" onclick="ocultar()">
             </div>
         </form>
-        <form action="" class="shadow rounded-3 p-4 m-3 w-80">
+        <form action="GestionarMovimientosController?accion=listar" method="post" id="rangoFechasForm" class="shadow rounded-3 p-4 m-3 w-80">
             <label for="inicio">Inicio</label>
             <input type="date" name="inicio" class="input">
             <label for="fin">Fin</label>
@@ -77,21 +80,33 @@
             <input type="submit" value="Consultar" class="btn ml-1">
         </form>
         <div class="shadow rounded-3 p-5 m-3 flex-column ai-center w-80">
-            <h2>Movimientos realizados</h2>
-            <div class="w-100">
-                <div class="flex-row sp-between">
-                    <div>
-                        <span class="txt-i txt-b">17/02/2023</span>
-                        <span>Desde </span>
-                        <span class="c-darkgreen txt-b">Banco</span>
-                        <span>hacia </span>
-                        <span class="c-darkgreen txt-b">Efectivo</span>
-                    </div>
-                    <p class="c-darkgreen txt-b ml-2">$1000</p>
-                </div>
-                <p class="txt-li">Transferencia entre cuentas</p>
-            </div>
+            <h2 class="mb-2">Movimientos realizados</h2>
+            <div id="panelMovimientos" class="w-100">
+	            <!--div class="w-100 flex-column" >
+	                <div class="flex-row sp-between">
+	                    <div>
+	                        <span class="txt-i txt-b">17/02/2023</span>
+	                        <span>Desde </span>
+	                        <span class="c-darkgreen txt-b">Banco</span>
+	                        <span>hacia </span>
+	                        <span class="c-darkgreen txt-b">Efectivo</span>
+	                    </div>
+	                    <p class="c-darkgreen txt-b ml-2">$1000</p>
+	                </div>
+	                <p class="txt-li">Transferencia entre cuentas</p>
+	            </div-->
+            </div>        
         </div>
     </main>
+    <script src="js/movimientos.js" type="module"></script>
+    <script>
+    	function ocultar() {
+    		document.querySelector("#nuevoMovimientoForm").classList.toggle("d-none", true);
+    	}
+    	
+    	function mostrar() {
+    		document.querySelector("#nuevoMovimientoForm").classList.toggle("d-none", false);
+    	}
+    </script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,11 +31,10 @@
             </nav>
         </div>
         <div class="flex-row ai-center">
-            <h4 class="mr-2">Usuario</h4>     
-                <a href="login.html" class="">
+            <h4 class="mr-2">${sessionScope.usuario}</h4>     
+                <a href="LogOutController" class="">
                     <i class="fa-solid fa-arrow-right-from-bracket fa-2xl c-darkgreen"></i>
                 </a>
-            </i>
         </div>
     </header>
 </body>

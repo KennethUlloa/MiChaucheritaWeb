@@ -50,6 +50,11 @@ public class LogInController extends HttpServlet {
 	
 	
 	private void autenticar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String usuario = request.getParameter("usuario");
+		String clave = request.getParameter("clave");
+		System.out.println(usuario);
+		//Autenticar
+		request.getSession().setAttribute("usuario", usuario);  
 		response.sendRedirect("HomePageController");
 	}
 }

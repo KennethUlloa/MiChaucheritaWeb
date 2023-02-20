@@ -37,6 +37,11 @@ public class GestionarEstadoCuentaController extends HttpServlet {
 	}
 	
 	private void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		VerificadorSesion verificador = new VerificadorSesion();
+		if(!verificador.verificarYRedirigir(request, response, "LogInController")) {
+			return;
+		}
+		
 		String accion = (request.getParameter("accion") == null)? "mostrar" : request.getParameter("accion");
 		switch(accion) {
 			case "mostrar":

@@ -18,14 +18,14 @@
                 <h1 class="m-1 txt-li f-1">Mi Chaucherita Web</h1>
                 <h3 class="m-2 txt-li f-2">Ingresa tus credenciales</h3>
             </div>
-            <form action="HomePageController" method="post">
+            <form action="LogInController?accion=autenticar" method="post">
                 <div class="flex-column">
                     <label for="usuario">Usuario</label>
-                    <input type="text" name="usuario"  placeholder="user1234" class="input mt-1">
+                    <input type="text" name="usuario"  placeholder="user1234" class="input mt-1" required>
                 </div>
                 <div class="flex-column mt-2">
                     <label for="clave">Contraseña</label>
-                    <input type="password" name="clave" placeholder="Contraseña12345" class="input mt-1">
+                    <input type="password" name="clave" placeholder="Contraseña12345" class="input mt-1" required>
                 </div>
                 <div class="flex-row jc-center txt-i m-3">
                     <a href="" class="link">¿No tienes una cuenta? Regístrate</a>

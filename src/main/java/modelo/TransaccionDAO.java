@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransaccionDAO {
+	/*
 	private static List<Transaccion> transacciones;
 	
 	public Transaccion getTransaccion(int id) {
@@ -62,5 +63,5 @@ public class TransaccionDAO {
 		transaccion.setId(maxId + 1);
 		getTransacciones().add(transaccion);
 	}
-
+*/
 }

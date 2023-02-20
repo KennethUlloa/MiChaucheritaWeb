@@ -127,7 +127,7 @@ body {
     color: var(--bg-green); 
 }
 
-.btn:hover {
+.btn:hover, .btn:focus {
     background-color: var(--bg-lightgreen);
 }
 

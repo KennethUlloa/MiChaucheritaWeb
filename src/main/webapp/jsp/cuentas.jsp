@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +31,8 @@
             </nav>
         </div>
         <div class="flex-row ai-center">
-            <h4 class="mr-2">Usuario</h4>     
-                <a href="login.html" class="">
+            <h4 class="mr-2">${sessionScope.usuario}</h4>     
+                <a href="LogOutController" class="">
                     <i class="fa-solid fa-arrow-right-from-bracket fa-2xl c-darkgreen"></i>
                 </a>
             </i>
@@ -37,8 +40,8 @@
     </header>
     <main class="w-100 flex-column ai-center">
         <div class="w-80 flex-column">
-            <button class="btn mb-3 w-fit">Crear cuenta</button>
-            <form action="" class="shadow rounded-3 p-4 w-fit my-3">
+            <button class="btn mb-3 w-fit" onclick="mostrarCrearCuenta()">Crear cuenta</button>
+            <form action="" class="shadow rounded-3 p-4 w-fit my-3 d-none" id="crearCuentaForm">
                 <div class="flex-row">
                     <div class="field">
                         <label for="nombreCuenta">Nombre de cuenta</label>
@@ -55,13 +58,13 @@
                 </div>
                 <div class="flex-row jc-end mt-2">
                     <input type="submit" value="Guardar" class="btn mr-1">
-                    <input type="button" value="Cancelar" class="btn secondary">
+                    <input type="button" value="Cancelar" class="btn secondary" onclick="ocultarCrearCuenta()">
                 </div>
             </form>
             <div class="bg-lightgray w-100 p-3 rounded-3 my-3 flex-column">
                 <h4 class="m-1">Ingresos y Gastos</h4>
-                <div class="flex-row">
-                    <div class="shadow rounded-3 bg-white p-4 w-fit m-2">
+                <div class="flex-row" id="panelIngresosGastos">
+                    <!--div class="shadow rounded-3 bg-white p-4 w-fit m-2">
                         <div class="flex-row">
                             <h4 class="c-darkgreen">Efectivo</h4>
                             <span class="ml-3">
@@ -78,26 +81,26 @@
                                 <i class="fa-solid fa-arrow-down-long c-darkgreen"></i>
                             </span>
                         </div>
-                    </div>
+                    </div-->
                 </div>
             </div>
             <div class="bg-lightgray w-100 p-3 rounded-3 my-3 flex-column">
                 <h4 class="m-1">Ingresos</h4>
-                <div class="flex-row">
-                    <div class="shadow rounded-3 bg-white p-4 w-fit m-2">
+                <div class="flex-row" id="panelIngresos">
+                    <!--div class="shadow rounded-3 bg-white p-4 w-fit m-2">
                         <div class="flex-row">
                             <h4 class="c-darkgreen">Nómina</h4>
                             <span class="ml-3">
                                 <i class="fa-solid fa-arrow-down-long c-darkgreen"></i>
                             </span>
                         </div>
-                    </div>
+                    </div-->
                 </div>
             </div>
             <div class="bg-lightgray w-100 p-3 rounded-3 my-3 flex-column">
                 <h4 class="m-1">Gastos</h4>
-                <div class="flex-row">
-                    <div class="shadow rounded-3 bg-white p-4 w-fit m-2">
+                <div class="flex-row" id="panelGastos">
+                    <!--div class="shadow rounded-3 bg-white p-4 w-fit m-2">
                         <div class="flex-row">
                             <h4 class="c-darkgreen">Universidad</h4>
                             <span class="ml-3">
@@ -112,10 +115,11 @@
                                 <i class="fa-solid fa-arrow-up-long c-darkgreen"></i>
                             </span>
                         </div>
-                    </div>
+                    </div-->
                 </div>
             </div>
         </div>
     </main>
+    <script src="js/cuentas.js"></script>
 </body>
 </html>
