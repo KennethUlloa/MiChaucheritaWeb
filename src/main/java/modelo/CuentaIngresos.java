@@ -1,6 +1,6 @@
 package modelo;
 
-public class CuentaIngresos extends Cuenta {
+public class CuentaIngresos extends Cuenta implements CuentaOrigen{
 	/**
 	 * 
 	 */
@@ -20,19 +20,15 @@ public class CuentaIngresos extends Cuenta {
 
 	@Override
 	public double getMonto() {
-		// TODO Auto-generated method stub
 		return ingresos;
 	}
 
 	@Override
-	public void registrarEgreso(double valor) {
+	public void registrarSalida(double valor) {
 		ingresos += valor;
 		
 	}
 
-	@Override
-	public void registrarIngreso(double valor) {
-		ingresos += valor;
-	}
+	
 	
 }

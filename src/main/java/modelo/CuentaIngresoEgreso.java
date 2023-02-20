@@ -1,6 +1,6 @@
 package modelo;
 
-public class CuentaIngresoEgreso extends Cuenta{
+public class CuentaIngresoEgreso extends Cuenta implements CuentaDestino,CuentaOrigen{
 	private double egresos;
 	private double ingresos;
 	
@@ -20,15 +20,17 @@ public class CuentaIngresoEgreso extends Cuenta{
 		return ingresos - egresos;
 	}
 
+	
 	@Override
-	public void registrarEgreso(double valor) {
+	public void registrarSalida(double valor) {
 		egresos += valor;
 		
 	}
 
 	@Override
-	public void registrarIngreso(double valor) {
+	public void registrarEntrada(double valor) {
 		ingresos += valor;
+		
 	}
 
 }

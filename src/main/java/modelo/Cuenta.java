@@ -39,8 +39,7 @@ public abstract class Cuenta implements Serializable{
 	}
 
 	abstract public double getMonto();
-	abstract public void registrarEgreso(double valor);
-	abstract public void registrarIngreso(double valor);
+	
 
 	@Override
 	public String toString() {
