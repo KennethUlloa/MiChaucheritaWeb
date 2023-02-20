@@ -21,6 +21,7 @@ public class EstadoCuenta implements Serializable{
 	public EstadoCuenta(List<Transaccion> transacciones) {
 		this();
 		//Estruturas donde se van a guardar las cuentas que obtenga
+		
 		HashMap<Integer, CuentaIngresos> mapCuentasIngresos = new HashMap<>();
 		HashMap<Integer, CuentaEgresos> mapCuentasEgresos = new HashMap<>();
 		CuentaIngresos cuentaIngreso = new CuentaIngresos();
