@@ -32,8 +32,7 @@ public class EstadoCuenta implements Serializable{
 		
 		HashMap<Integer, CuentaIngresos> mapCuentasIngresos = new HashMap<>();
 		HashMap<Integer, CuentaEgresos> mapCuentasEgresos = new HashMap<>();
-		CuentaIngresos cuentaIngreso = new CuentaIngresos();
-		CuentaEgresos cuentaEgreso = new CuentaEgresos();
+
 		List<Cuenta> cuentasExistentes = new CuentaDAO().getAll();
 		
 		//Cargar primero todas las cuentas existentes
@@ -44,22 +43,18 @@ public class EstadoCuenta implements Serializable{
 			}
 			
 			if(cuenta instanceof CuentaIngresos) {
-				cuentaIngreso.setNumeroCuenta(cuenta.getNumeroCuenta());
-				cuentaIngreso.setNombreCuenta(cuenta.getNombreCuenta());
-				mapCuentasIngresos.put(cuentaIngreso.getNumeroCuenta(),cuentaIngreso);
+				mapCuentasIngresos.put(cuenta.getId(),new CuentaIngresos(cuenta.getId(), cuenta.getNombre()));
 			}
 			
 			if(cuenta instanceof CuentaEgresos) {
-				cuentaEgreso.setNumeroCuenta(cuenta.getNumeroCuenta());
-				cuentaEgreso.setNombreCuenta(cuenta.getNombreCuenta());
-				mapCuentasEgresos.put(cuenta.getNumeroCuenta(), cuentaEgreso);
+				mapCuentasEgresos.put(cuenta.getId(),new CuentaEgresos(cuenta.getId(), cuenta.getNombre()));
 			}
 		}
 		
 		//Se realiza la sumarizacion de cada cuenta con la traccion registrada
 		for(Transaccion t : transacciones) {
-			CuentaIngresos origen = mapCuentasIngresos.get(((Cuenta)t.getOrigen()).getNumeroCuenta());
-			CuentaEgresos destino = mapCuentasEgresos.get(((Cuenta)t.getDestino()).getNumeroCuenta());
+			CuentaIngresos origen = mapCuentasIngresos.get(t.getOrigen().getId());
+			CuentaEgresos destino = mapCuentasEgresos.get(t.getDestino().getId());
 			if(origen != null) {
 				origen.registrarSalida(t.getMonto());
 			}
@@ -68,9 +63,12 @@ public class EstadoCuenta implements Serializable{
 			}
 			
 		}
+			
+		
 		for(Integer i : mapCuentasIngresos.keySet()) {
 			cuentasIngreso.add(mapCuentasIngresos.get(i));
 		}
+		
 		for(Integer i : mapCuentasEgresos.keySet()) {
 			cuentasEgreso.add(mapCuentasEgresos.get(i));
 		}

@@ -19,7 +19,7 @@ public class CuentaDAO implements ICuentaDAO {
 	@Override
 	public Cuenta getById(Integer id) {
 		for (Cuenta cuenta : getAll()) {
-			if(cuenta.getNumeroCuenta()==id) {
+			if(cuenta.getId()==id) {
 				return cuenta;
 			}
 		}

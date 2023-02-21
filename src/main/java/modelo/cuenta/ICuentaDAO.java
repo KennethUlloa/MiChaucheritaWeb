@@ -6,5 +6,5 @@ import modelo.DAO;
 import modelo.persona.Persona;
 
 public interface ICuentaDAO extends DAO<Cuenta, Integer>{
-	public List<Cuenta> getByPropietario(Persona persona); 
+	public List<Cuenta> getByPropietario(Persona persona);
 }
