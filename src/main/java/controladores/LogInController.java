@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.IPersonaDAO;
-import modelo.PersonaDAO;
+import modelo.persona.IPersonaDAO;
+import modelo.persona.Persona;
+import modelo.persona.PersonaDAO;
 import utilities.JSON;
-import modelo.Persona;
 
 /**
  * Servlet implementation class LogInController
@@ -65,13 +65,13 @@ public class LogInController extends HttpServlet {
 		if(persona == null) {
 			JSON error = new JSON();
 			error.add("error", "Usuario y/o contraseña incorrectos");
-			response.sendError(400);
+			response.setStatus(400);
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json");
 			response.getWriter().print(error);
 		}else {
 			request.getSession().setAttribute("usuario", persona);  
-			response.sendRedirect("HomePageController");
+			response.sendRedirect("HomePageController"); 
 		}
 		//Autenticar
 		

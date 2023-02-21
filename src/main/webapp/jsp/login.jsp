@@ -18,7 +18,7 @@
                 <h1 class="m-1 txt-li f-1">Mi Chaucherita Web</h1>
                 <h3 class="m-2 txt-li f-2">Ingresa tus credenciales</h3>
             </div>
-            <form action="LogInController?accion=autenticar" method="post">
+            <form action="LogInController?accion=autenticar" method="post" id="loginForm">
                 <div class="flex-column">
                     <label for="usuario">Usuario</label>
                     <input type="text" name="usuario"  placeholder="user1234" class="input mt-1" required>
@@ -34,5 +34,6 @@
             </form>
         </div>
     </main>
+    <script src="js/login.js"></script>
 </body>
 </html>

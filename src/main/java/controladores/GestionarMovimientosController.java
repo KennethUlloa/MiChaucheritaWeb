@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.Cuenta;
-import modelo.CuentaDAO;
-import modelo.CuentaEgresos;
-import modelo.CuentaIngresos;
-import modelo.Transaccion;
-import modelo.TransaccionDAO;
+import modelo.cuenta.Cuenta;
+import modelo.cuenta.CuentaDAO;
+import modelo.cuenta.CuentaEgresos;
+import modelo.cuenta.CuentaIngresos;
+import modelo.transaccion.ITransaccionDAO;
+import modelo.transaccion.Transaccion;
+import modelo.transaccion.TransaccionDAO;
 import utilities.JSON;
 
 @WebServlet("/GestionarMovimientosController")
@@ -69,6 +70,10 @@ public class GestionarMovimientosController extends HttpServlet {
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String inicio = request.getParameter("inicio");
+		String fin = request.getParameter("fin");
+		
+		/*
 		JSON banco = new JSON();
 		banco.add("nombre", "Banco");
 		banco.add("tipo", "IE");
@@ -101,11 +106,15 @@ public class GestionarMovimientosController extends HttpServlet {
 		t2.add("destino", efectivo);
 		t2.add("concepto", "Retiro de dinero");
 		t2.add("monto", 400);
-		t2.add("fecha", "20-02-2022");
+		t2.add("fecha", "20-02-2022");*/
 		
-		List<JSON> transacciones = new ArrayList<>();
-		transacciones.add(t);
-		transacciones.add(t2);
+		ITransaccionDAO modelo = new TransaccionDAO(); 
+		List<Transaccion> transacciones = modelo.getAll();
+		if(inicio != null && fin != null) {
+			LocalDate fechaInicio = LocalDate.parse(inicio);
+			LocalDate fechaFin = LocalDate.parse(fin);
+			transacciones = modelo.getByRange(fechaInicio, fechaFin);
+		}
 		
 		response.setContentType("application/json; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");

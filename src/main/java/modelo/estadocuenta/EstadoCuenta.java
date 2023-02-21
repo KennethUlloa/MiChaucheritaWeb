@@ -1,10 +1,16 @@
-package modelo;
+package modelo.estadocuenta;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.cuenta.Cuenta;
+import modelo.cuenta.CuentaDAO;
+import modelo.cuenta.CuentaEgresos;
+import modelo.cuenta.CuentaIngresoEgreso;
+import modelo.cuenta.CuentaIngresos;
+import modelo.transaccion.Transaccion;
 import utilities.JSON;
 
 public class EstadoCuenta implements Serializable{
@@ -52,8 +58,8 @@ public class EstadoCuenta implements Serializable{
 		
 		//Se realiza la sumarizacion de cada cuenta con la traccion registrada
 		for(Transaccion t : transacciones) {
-			CuentaIngresos origen = mapCuentasIngresos.get(t.getOrigen().getNumeroCuenta());
-			CuentaEgresos destino = mapCuentasEgresos.get(t.getDestino().getNumeroCuenta());
+			CuentaIngresos origen = mapCuentasIngresos.get(((Cuenta)t.getOrigen()).getNumeroCuenta());
+			CuentaEgresos destino = mapCuentasEgresos.get(((Cuenta)t.getDestino()).getNumeroCuenta());
 			if(origen != null) {
 				origen.registrarSalida(t.getMonto());
 			}

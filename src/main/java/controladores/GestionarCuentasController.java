@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.cuenta.Cuenta;
+import modelo.cuenta.CuentaDAO;
+import modelo.cuenta.ICuentaDAO;
+import modelo.persona.Persona;
 import utilities.JSON;
 
 /**
@@ -57,35 +61,11 @@ public class GestionarCuentasController extends HttpServlet {
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		JSON propietario = new JSON();
-		propietario.add("nombre", "Kenneth");
-		
-		JSON cuenta = new JSON();
-		cuenta.add("nombre", "Banco");
-		cuenta.add("tipo", "IE");
-		cuenta.add("monto", 500.0);
-		
-		JSON cuenta2 = new JSON();
-		cuenta2.add("nombre", "Efectivo");
-		cuenta2.add("tipo", "IE");
-		cuenta2.add("monto", 50.0);
-		
-		JSON cuenta3 = new JSON();
-		cuenta3.add("nombre", "Nómina");
-		cuenta3.add("tipo", "I");
-		cuenta3.add("monto", 1000.0);
-		
-		JSON cuenta4 = new JSON();
-		cuenta4.add("nombre", "Regalo");
-		cuenta4.add("tipo", "E");
-		cuenta4.add("monto", -350.0);
-		
-		List<JSON> cuentas = new ArrayList<>();
-		cuentas.add(cuenta);
-		cuentas.add(cuenta2);
-		cuentas.add(cuenta3);
-		cuentas.add(cuenta4);
-		
+		ICuentaDAO modelo = new CuentaDAO();
+		Persona persona = (Persona) request.getSession().getAttribute("usuario");
+		System.out.println(persona);
+		List<Cuenta> cuentas = modelo.getByPropietario(persona);
+		System.out.println(cuentas);
 		response.setContentType("application/json; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().print(cuentas);

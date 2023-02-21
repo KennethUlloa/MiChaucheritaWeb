@@ -1,6 +1,7 @@
-package modelo;
+package modelo.persona;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import utilities.JSON;
 
@@ -50,13 +51,27 @@ public class Persona implements Serializable{
 	public String toString() {
 		JSON json = new JSON();
 		json.add("usuario", this.usuario);
-		json.add("nombre", this.usuario);
+		json.add("nombre", this.nombre);
 		json.add("clave", this.clave);
 		return json.toString();
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(clave, nombre, usuario);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return Objects.equals(clave, other.clave) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(usuario, other.usuario);
+	}
+		
 }

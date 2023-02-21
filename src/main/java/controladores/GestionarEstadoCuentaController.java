@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.EstadoCuenta;
-import modelo.Transaccion;
-import modelo.TransaccionDAO;
+import modelo.estadocuenta.EstadoCuenta;
+import modelo.transaccion.ITransaccionDAO;
+import modelo.transaccion.Transaccion;
 
 /**
  * Servlet implementation class EstadoCuentaController

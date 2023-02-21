@@ -1,4 +1,6 @@
-package modelo;
+package modelo.cuenta;
+
+import utilities.JSON;
 
 public class CuentaEgresos extends Cuenta implements CuentaDestino {
 	/**
@@ -26,7 +28,16 @@ public class CuentaEgresos extends Cuenta implements CuentaDestino {
 	@Override
 	public void registrarEntrada(double valor) {
 		egresos += valor;
-		
+	}
+	
+	@Override
+	public String toString() {
+		JSON json = new JSON();
+		json.add("nombre", this.getNombreCuenta());
+		json.add("numero", this.getNumeroCuenta());
+		json.add("monto",this.getMonto());	
+		json.add("tipo","E");
+		return json.toString();
 	}
 	
 }

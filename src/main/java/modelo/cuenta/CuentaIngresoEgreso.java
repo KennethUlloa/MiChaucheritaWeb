@@ -1,4 +1,6 @@
-package modelo;
+package modelo.cuenta;
+
+import utilities.JSON;
 
 public class CuentaIngresoEgreso extends Cuenta implements CuentaDestino,CuentaOrigen{
 	private double egresos;
@@ -30,7 +32,16 @@ public class CuentaIngresoEgreso extends Cuenta implements CuentaDestino,CuentaO
 	@Override
 	public void registrarEntrada(double valor) {
 		ingresos += valor;
-		
+	}
+	
+	@Override
+	public String toString() {
+		JSON json = new JSON();
+		json.add("nombre", this.getNombreCuenta());
+		json.add("numero", this.getNumeroCuenta());
+		json.add("monto",this.getMonto());	
+		json.add("tipo","IE");
+		return json.toString();
 	}
 
 }

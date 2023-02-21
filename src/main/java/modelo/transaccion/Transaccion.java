@@ -1,8 +1,10 @@
-package modelo;
+package modelo.transaccion;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import modelo.cuenta.CuentaDestino;
+import modelo.cuenta.CuentaOrigen;
 import utilities.JSON;
 
 public class Transaccion implements Serializable{
@@ -82,12 +84,14 @@ public class Transaccion implements Serializable{
 
 	@Override
 	public String toString() {
-		return "{\"id\":" + this.getId() + ","
-				+ "\"origen\":" + this.getOrigen() + ","
-				+ "\"destino\":" + this.getDestino() + ","
-				+ "\"concepto\":\"" + this.getConcepto().replace("\"", "\\\"") +"\","
-				+ "\"monto\":" + this.getMonto() +","
-				+ "\"fecha\":\"" + this.getFecha() +"\""
-				+ "}";
+		JSON json = new JSON();
+		json.add("id", this.id);
+		json.add("origen", this.origen);
+		json.add("destino", this.destino);
+		json.add("concepto", this.concepto);
+		json.add("monto", this.monto);
+		json.add("fecha", this.fecha.toString());
+		
+		return json.toString();
 	}
 }

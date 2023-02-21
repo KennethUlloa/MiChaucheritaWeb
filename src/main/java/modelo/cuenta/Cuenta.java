@@ -1,18 +1,16 @@
-package modelo;
+package modelo.cuenta;
 
 import java.io.Serializable;
 
+import modelo.persona.Persona;
 import utilities.JSON;
 
 public abstract class Cuenta implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int numeroCuenta;
 	private String nombreCuenta;
-	
+	private Persona propietario;
 	
 	
 	public Cuenta() {
@@ -43,6 +41,14 @@ public abstract class Cuenta implements Serializable{
 	abstract public double getMonto();
 	
 
+	public Persona getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(Persona propietario) {
+		this.propietario = propietario;
+	}
+	
 	@Override
 	public String toString() {
 		JSON json = new JSON();
@@ -51,7 +57,5 @@ public abstract class Cuenta implements Serializable{
 		json.add("monto",this.getMonto());		
 		return json.toString();
 	}
-	
-	
 	
 }
