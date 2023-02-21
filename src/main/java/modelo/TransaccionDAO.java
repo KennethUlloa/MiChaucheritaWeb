@@ -4,64 +4,73 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransaccionDAO {
-	/*
+public class TransaccionDAO implements ITransaccionDAO{
 	private static List<Transaccion> transacciones;
 	
-	public Transaccion getTransaccion(int id) {
+	@Override
+	public void create(Transaccion transaccion) {
+		int maxId = 0;
+		for(Transaccion t : getAll()) {
+			if (t.getId() > maxId) {
+				maxId = t.getId();
+			}
+		}
+		transaccion.setId(maxId + 1);
+		getAll().add(transaccion);
+	}
+
+	@Override
+	public Transaccion getBy(Integer id) {
+		// no aplica por regla de negocio
 		return null;
 	}
-	
-	public List<Transaccion> getTransacciones() {
-		
+
+	@Override
+	public List<Transaccion> getAll() {
 		if(transacciones == null) {
+			CuentaDAO cd = new CuentaDAO();			
 			transacciones = new ArrayList<>();
 			//1 - 3 Nomina a banco
-			transacciones.add(realizarTransaccion(1,1,3,1000,"Pago de nómina de mi trabajo", LocalDate.of(2022, 12, 31)));
-			//3 - 4 Banco a Universidad
-			transacciones.add(realizarTransaccion(2,3,5,100,"Libro \"Contabilidad básica\"", LocalDate.of(2023, 1, 16)));
+			transacciones.add(new Transaccion(1, (CuentaOrigen)cd.getBy(1), 
+					(CuentaDestino)cd.getBy(3), "Pago de nómina de mi trabajo", 1000, 
+					LocalDate.of(2022, 12, 31)));
+			//3 - 5 Banco a Universidad
+			transacciones.add(new Transaccion(2, (CuentaOrigen)cd.getBy(3), 
+					(CuentaDestino)cd.getBy(5), "Libro \"Contabilidad básica\"", 100, 
+					LocalDate.of(2023, 1, 16)));
 			//3 - 4 Banco a Efectivo
-			transacciones.add(realizarTransaccion(3,3,4,400,"Traspaso entre cuentas", LocalDate.of(2023, 1, 20)));
+			transacciones.add(new Transaccion(3, (CuentaOrigen)cd.getBy(3), 
+					(CuentaDestino)cd.getBy(4), "Traspaso entre cuentas", 400, 
+					LocalDate.of(2023, 1, 20)));
 			//4 - 2 Efectivo a regalo
-			transacciones.add(realizarTransaccion(4,4,2,350,"Teléfono Celular para mamá", LocalDate.of(2023, 1, 20)));
+			transacciones.add(new Transaccion(4, (CuentaOrigen)cd.getBy(4), 
+					(CuentaDestino)cd.getBy(2), "Teléfono Celular para mamá", 350, 
+					LocalDate.of(2023, 1, 20)));
 		}
 		return transacciones;
 	}
-	
-	private Transaccion realizarTransaccion(int id, int origen, int destino, double monto, String concepto, LocalDate fecha) {
-		CuentaDAO modeloCuenta = new CuentaDAO();
-		Cuenta origenC = modeloCuenta.getCuenta(origen);
-		origenC.registrarEgreso(monto);
-		Cuenta destinoC = modeloCuenta.getCuenta(destino);
-		destinoC.registrarIngreso(monto);
-		return new Transaccion(id, origenC, destinoC, concepto, monto,fecha);
+
+	@Override
+	public void update(Transaccion object) {
+		// no aplica por regla de negocio
 		
 	}
-	
-	public List<Transaccion> getTransacciones(LocalDate inicio, LocalDate fin) {
+
+	@Override
+	public void delete(Integer id) {
+		// no aplica por regla de negocio
+		
+	}
+
+	@Override
+	public List<Transaccion> getByRange(LocalDate inicio, LocalDate fin) {
 		List<Transaccion> rangoTransacciones = new ArrayList<>(); 
-		for(Transaccion t : getTransacciones()) {
+		for(Transaccion t : getAll()) {
 			if(t.getFecha().isEqual(inicio) || t.getFecha().isEqual(fin) || 
 					(t.getFecha().isAfter(inicio) && t.getFecha().isBefore(fin))) {
 				rangoTransacciones.add(t);
 			}
 		}
 		return rangoTransacciones;
-	}
-	
-	public void updateTransaccion(Transaccion transaccion) {
-		
-	}
-	
-	public void registrarTransaccion(Transaccion transaccion) {
-		int maxId = 0;
-		for(Transaccion t : getTransacciones()) {
-			if (t.getId() > maxId) {
-				maxId = t.getId();
-			}
-		}
-		transaccion.setId(maxId + 1);
-		getTransacciones().add(transaccion);
-	}
-*/
+	}	
 }

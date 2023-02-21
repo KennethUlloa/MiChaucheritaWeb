@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.EstadoCuenta;
 import modelo.Transaccion;
-import modelo.TransaccionDAO;
+import modelo.ITransaccionDAO;
 
 /**
  * Servlet implementation class EstadoCuentaController

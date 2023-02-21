@@ -18,7 +18,7 @@ import modelo.CuentaDAO;
 import modelo.CuentaEgresos;
 import modelo.CuentaIngresos;
 import modelo.Transaccion;
-import modelo.TransaccionDAO;
+import modelo.ITransaccionDAO;
 import utilities.JSON;
 
 @WebServlet("/GestionarMovimientosController")

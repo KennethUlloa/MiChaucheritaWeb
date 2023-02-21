@@ -7,8 +7,8 @@ public class Transaccion implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private Cuenta origen;
-	private Cuenta destino;
+	private CuentaOrigen origen;
+	private CuentaDestino destino;
 	private String concepto;
 	private double monto;
 	private LocalDate fecha;
@@ -17,7 +17,7 @@ public class Transaccion implements Serializable{
 	
 	
 	
-	public Transaccion(int id, Cuenta origen, Cuenta destino, String concepto, double monto, LocalDate fecha) {
+	public Transaccion(int id, CuentaOrigen origen, CuentaDestino destino, String concepto, double monto, LocalDate fecha) {
 		super();
 		this.id = id;
 		this.origen = origen;
@@ -30,30 +30,39 @@ public class Transaccion implements Serializable{
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Cuenta getOrigen() {
+	
+	public CuentaOrigen getOrigen() {
 		return origen;
 	}
-	public void setOrigen(Cuenta origen) {
+	
+	public void setOrigen(CuentaOrigen origen) {
 		this.origen = origen;
 	}
-	public Cuenta getDestino() {
+	
+	public CuentaDestino getDestino() {
 		return destino;
 	}
-	public void setDestino(Cuenta destino) {
+	
+	public void setDestino(CuentaDestino destino) {
 		this.destino = destino;
 	}
+	
 	public String getConcepto() {
 		return concepto;
 	}
+	
 	public void setConcepto(String concepto) {
 		this.concepto = concepto;
 	}
+	
 	public double getMonto() {
 		return monto;
 	}
+	
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
@@ -61,11 +70,16 @@ public class Transaccion implements Serializable{
 	public LocalDate getFecha() {
 		return fecha;
 	}
+	
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-
-
+	
+	public void realizarTransaccion() {
+		origen.registrarSalida(monto);
+		destino.registrarEntrada(monto);
+		
+	}
 
 	@Override
 	public String toString() {
@@ -77,7 +91,4 @@ public class Transaccion implements Serializable{
 				+ "\"fecha\":\"" + this.getFecha() +"\""
 				+ "}";
 	}
-	
-	
-
 }
