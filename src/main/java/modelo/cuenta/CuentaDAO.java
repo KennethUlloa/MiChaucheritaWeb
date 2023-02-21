@@ -70,11 +70,7 @@ public class CuentaDAO implements ICuentaDAO {
 
 	@Override
 	public void delete(Integer id) {
-		for (Cuenta cuenta:cuentas) {			
-			if(cuenta.getNumeroCuenta()==id) {				
-				cuentas.remove(cuentas.indexOf(cuenta));				
-			}
-		}
+		cuentas.removeIf(cuenta->cuenta.getNumeroCuenta()==id);
 	}
 
 	@Override
