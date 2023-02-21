@@ -1,38 +1,37 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PersonaDAO implements DAO<Persona, String>{
+public class PersonaDAO implements IPersonaDAO{
 	
-	
-	
-	
-	
-	
-	//class methods
-	public Persona autenticar(String usuario, String clave) {
-		Persona persona = null;
-		
-		
-		return persona;
-	}
+	private static List<Persona> personas = null;
 
 	@Override
-	public void create(Persona object) {
-		// TODO Auto-generated method stub
+	public void create(Persona persona) {
+		getAll().add(persona);
 		
 	}
 
 	@Override
-	public Persona getBy(String id) {
-		// TODO Auto-generated method stub
+	public Persona getById(String id) {
+		for (Persona persona : getAll()) {
+			if(persona.getUsuario().equals(id)) {
+				return persona;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public List<Persona> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		if(personas == null) {
+			personas = new ArrayList<>();
+			personas.add(new Persona("kenneth", "Kenneth", "1234"));
+			personas.add(new Persona("admin", "ADMINISTRADOR", "1234"));
+			personas.add(new Persona("luigi", "Luigi", "1234"));
+		}
+		return personas;
 	}
 
 	@Override
@@ -46,10 +45,15 @@ public class PersonaDAO implements DAO<Persona, String>{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	//overrided methods
 
-	
-	
+	@Override
+	public Persona autenticar(String usuario, String clave) {
+		Persona persona = getById(usuario);
+		if(persona != null && persona.getClave().equals(clave)) {
+			return persona;
+		}
+		return null;
+	}
+
 
 }

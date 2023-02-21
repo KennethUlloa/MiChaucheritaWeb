@@ -2,6 +2,8 @@ package modelo;
 
 import java.io.Serializable;
 
+import utilities.JSON;
+
 public abstract class Cuenta implements Serializable{
 
 	/**
@@ -43,10 +45,11 @@ public abstract class Cuenta implements Serializable{
 
 	@Override
 	public String toString() {
-		return "{\"numeroCuenta\":\"" + this.numeroCuenta + "\","
-				+ "\"nombreCuenta\":\"" + this.nombreCuenta + "\","
-				+ "\"monto\":" + this.getMonto()
-				+ "}";
+		JSON json = new JSON();
+		json.add("nombre", this.nombreCuenta);
+		json.add("numero", this.numeroCuenta);
+		json.add("monto",this.getMonto());		
+		return json.toString();
 	}
 	
 	

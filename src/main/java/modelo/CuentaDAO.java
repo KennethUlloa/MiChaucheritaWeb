@@ -5,27 +5,6 @@ import java.util.List;
 
 public class CuentaDAO implements ICuentaDAO {
 	private static List<Cuenta> cuentas = null;
-	/*
-	public Cuenta getCuenta(int id) {
-		for (Cuenta cuenta : getCuentas()) {
-			if(cuenta.getNumeroCuenta()==id) {
-				return cuenta;
-			}
-		}
-		return null;
-	}
-	/*
-	public List<Cuenta> getCuentas() {
-		if(cuentas == null) {
-			cuentas = new ArrayList<Cuenta>();
-			cuentas.add(new CuentaIngresos(1,"Nómina"));
-			cuentas.add(new CuentaEgresos(2,"Regalo"));
-			cuentas.add(new CuentaEgresos(5,"Universidad"));
-			cuentas.add(new CuentaIngresoEgreso(3,"Banco"));
-			cuentas.add(new CuentaIngresoEgreso(4,"Efectivo"));
-		}
-		return cuentas;
-	}*/
 
 	@Override
 	public void create(Cuenta object) {
@@ -34,7 +13,7 @@ public class CuentaDAO implements ICuentaDAO {
 	}
 
 	@Override
-	public Cuenta getBy(Integer id) {
+	public Cuenta getById(Integer id) {
 		for (Cuenta cuenta : getAll()) {
 			if(cuenta.getNumeroCuenta()==id) {
 				return cuenta;

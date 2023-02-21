@@ -31,7 +31,7 @@
             </nav>
         </div>
         <div class="flex-row ai-center">
-            <h4 class="mr-2">${sessionScope.usuario}</h4>     
+            <h4 class="mr-2">${sessionScope.usuario.nombre}</h4>     
                 <a href="LogOutController" class="">
                     <i class="fa-solid fa-arrow-right-from-bracket fa-2xl c-darkgreen"></i>
                 </a>

@@ -5,17 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import utilities.JSON;
+
 public class EstadoCuenta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private List<CuentaIngresos> cuentasIngresos;
-	private List<CuentaEgresos> cuentasEgresos;
+	private List<CuentaIngresos> cuentasIngreso;
+	private List<CuentaEgresos> cuentasEgreso;
 	private List<CuentaIngresoEgreso> cuentasIngresoEgreso;
 	
 	public EstadoCuenta() {
 		cuentasIngresoEgreso = new ArrayList<>();
-		cuentasIngresos = new ArrayList<>();
-		cuentasEgresos = new ArrayList<>();
+		cuentasIngreso = new ArrayList<>();
+		cuentasEgreso = new ArrayList<>();
 	}
 	
 	public EstadoCuenta(List<Transaccion> transacciones) {
@@ -61,27 +63,27 @@ public class EstadoCuenta implements Serializable{
 			
 		}
 		for(Integer i : mapCuentasIngresos.keySet()) {
-			cuentasIngresos.add(mapCuentasIngresos.get(i));
+			cuentasIngreso.add(mapCuentasIngresos.get(i));
 		}
 		for(Integer i : mapCuentasEgresos.keySet()) {
-			cuentasEgresos.add(mapCuentasEgresos.get(i));
+			cuentasEgreso.add(mapCuentasEgresos.get(i));
 		}
 	}
 
 	public List<CuentaIngresos> getCuentasIngresos() {
-		return cuentasIngresos;
+		return cuentasIngreso;
 	}
 
 	public void setCuentasIngresos(List<CuentaIngresos> cuentasIngresos) {
-		this.cuentasIngresos = cuentasIngresos;
+		this.cuentasIngreso = cuentasIngresos;
 	}
 
 	public List<CuentaEgresos> getCuentasEgresos() {
-		return cuentasEgresos;
+		return cuentasEgreso;
 	}
 
 	public void setCuentasEgresos(List<CuentaEgresos> cuentasEgresos) {
-		this.cuentasEgresos = cuentasEgresos;
+		this.cuentasEgreso = cuentasEgresos;
 	}
 
 	public List<CuentaIngresoEgreso> getCuentasIngresoEgreso() {
@@ -94,8 +96,11 @@ public class EstadoCuenta implements Serializable{
 
 	@Override
 	public String toString() {
-		return "{\"cuentasIngresos\":" + cuentasIngresos + ", \"cuentasEgresos\":" + cuentasEgresos
-				+ ", \"cuentasIngresoEgreso\":" + cuentasIngresoEgreso + "}";
+		JSON json = new JSON();
+		json.add("cuentasIngreso", this.cuentasIngreso);
+		json.add("cuentasIngresoEgreso", this.cuentasIngresoEgreso);
+		json.add("cuentasEgreso", this.cuentasEgreso);
+		return json.toString();
 	}
 	
 
