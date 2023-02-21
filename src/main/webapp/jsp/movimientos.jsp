@@ -40,7 +40,7 @@
     </header>
     <main class="w-100 flex-column ai-center p-5">
         <button class="btn m-2" onclick="mostrar()">+ Movimiento</button>
-        <form action="" method="post" class="shadow rounded-3 p-4 m-3 d-none" id="nuevoMovimientoForm">
+        <form action="GestionarMovimientosController?accion=registrar" method="post" class="shadow rounded-3 p-4 m-3 d-none" id="nuevoMovimientoForm">
             <div class="flex-row">
                 <div class="field mr-1">
                     <label for="monto">Monto</label>
@@ -49,17 +49,17 @@
                 <div class="field mr-1">
                     <label for="origen">Cuenta origen</label>
                     <select name="origen" id="" class="input">
-                        <option value="1">Banco</option>
+                        <!--option value="1">Banco</option>
                         <option value="2">Efectivo</option>
-                        <option value="3">Nómina</option>
+                        <option value="3">Nómina</option-->
                     </select>
                 </div>
                 <div class="field">
                     <label for="destino">Cuenta destino</label>
                     <select name="destino" id="" class="input">
-                        <option value="1">Banco</option>
+                        <!--option value="1">Banco</option>
                         <option value="2">Efectivo</option>
-                        <option value="3">Nómina</option>
+                        <option value="3">Nómina</option-->
                     </select>
                 </div>
             </div>

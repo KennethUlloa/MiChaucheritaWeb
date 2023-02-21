@@ -23,6 +23,7 @@ import modelo.persona.Persona;
 import modelo.transaccion.ITransaccionDAO;
 import modelo.transaccion.Transaccion;
 import modelo.transaccion.TransaccionDAO;
+import utilities.FiltroTransaccion;
 import utilities.JSON;
 
 @WebServlet("/GestionarMovimientosController")
@@ -77,17 +78,17 @@ public class GestionarMovimientosController extends HttpServlet {
 		String concepto = request.getParameter("concepto");
 		
 		//Llamar al modelo
-		LocalDate fechaTransaccion = LocalDate.parse(fecha);
+		LocalDate fechaTransaccion = LocalDate.now();
 		CuentaDAO modeloCuenta = new CuentaDAO();
 		CuentaOrigen cuentaOrigen = (CuentaOrigen) modeloCuenta.getById(Integer.parseInt(origen));
 		CuentaDestino cuentaDestino= (CuentaDestino) modeloCuenta.getById(Integer.parseInt(destino));
 		Transaccion transaccion = new Transaccion(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
-		transaccion.realizarTransaccion();
+		//transaccion.realizarTransaccion();
 		ITransaccionDAO modeloTransaccion = new TransaccionDAO();
 		modeloTransaccion.create(transaccion);
 		
 		//Llamar a la vista
-		
+		response.sendRedirect("GestionarMovimientosController");
 		
 	}
 	
@@ -106,11 +107,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		}
 		
 		Persona persona = (Persona) request.getSession().getAttribute("usuario");
-		transacciones = transacciones.stream().filter(transaccion -> {
-			CuentaOrigen origen = transaccion.getOrigen(); 
-			CuentaDestino destino = transaccion.getDestino();
-			return origen.getPropietario().equals(persona) || destino.getPropietario().equals(persona);
-		}).toList();
+		transacciones = transacciones.stream().filter(new FiltroTransaccion(persona)).toList();
 		
 		//Llamar a la vista
 		response.setContentType("application/json; charset=UTF-8");

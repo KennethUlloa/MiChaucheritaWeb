@@ -16,3 +16,9 @@ export function crearElementoTransaccion(transaccion) {
 	return div;
 }
 
+export function createOption(cuenta) {
+	var option = document.createElement("option");
+	option.value = cuenta.numero;
+	option.textContent = cuenta.nombre;
+	return option;
+}

@@ -10,6 +10,7 @@ import modelo.cuenta.CuentaDAO;
 import modelo.cuenta.CuentaEgresos;
 import modelo.cuenta.CuentaIngresoEgreso;
 import modelo.cuenta.CuentaIngresos;
+import modelo.persona.Persona;
 import modelo.transaccion.Transaccion;
 import utilities.JSON;
 
@@ -19,6 +20,7 @@ public class EstadoCuenta implements Serializable{
 	private List<CuentaIngresos> cuentasIngreso;
 	private List<CuentaEgresos> cuentasEgreso;
 	private List<CuentaIngresoEgreso> cuentasIngresoEgreso;
+	private List<Transaccion> transacciones;
 	
 	public EstadoCuenta() {
 		cuentasIngresoEgreso = new ArrayList<>();
@@ -26,14 +28,14 @@ public class EstadoCuenta implements Serializable{
 		cuentasEgreso = new ArrayList<>();
 	}
 	
-	public EstadoCuenta(List<Transaccion> transacciones) {
+	public EstadoCuenta(List<Transaccion> transacciones, Persona persona) {
 		this();
 		//Estruturas donde se van a guardar las cuentas que obtenga
-		
+		this.transacciones = transacciones;
 		HashMap<Integer, CuentaIngresos> mapCuentasIngresos = new HashMap<>();
 		HashMap<Integer, CuentaEgresos> mapCuentasEgresos = new HashMap<>();
 
-		List<Cuenta> cuentasExistentes = new CuentaDAO().getAll();
+		List<Cuenta> cuentasExistentes = new CuentaDAO().getByPropietario(persona);
 		
 		//Cargar primero todas las cuentas existentes
 		for(Cuenta cuenta : cuentasExistentes ) {
@@ -97,6 +99,14 @@ public class EstadoCuenta implements Serializable{
 	public void setCuentasIngresoEgreso(List<CuentaIngresoEgreso> cuentasIngresoEgreso) {
 		this.cuentasIngresoEgreso = cuentasIngresoEgreso;
 	}
+	
+	public List<Transaccion> getTransacciones() {
+		return transacciones;
+	}
+
+	public void setTransacciones(List<Transaccion> transacciones) {
+		this.transacciones = transacciones;
+	}
 
 	@Override
 	public String toString() {
@@ -104,6 +114,7 @@ public class EstadoCuenta implements Serializable{
 		json.add("cuentasIngreso", this.cuentasIngreso);
 		json.add("cuentasIngresoEgreso", this.cuentasIngresoEgreso);
 		json.add("cuentasEgreso", this.cuentasEgreso);
+		json.add("transacciones", transacciones);
 		return json.toString();
 	}
 	

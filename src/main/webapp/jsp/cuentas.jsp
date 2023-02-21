@@ -41,7 +41,7 @@
     <main class="w-100 flex-column ai-center">
         <div class="w-80 flex-column">
             <button class="btn mb-3 w-fit" onclick="mostrarCrearCuenta()">Crear cuenta</button>
-            <form action="" class="shadow rounded-3 p-4 w-fit my-3 d-none" id="crearCuentaForm">
+            <form action="GestionarCuentasController?accion=crear" method="post" class="shadow rounded-3 p-4 w-fit my-3 d-none" id="crearCuentaForm">
                 <div class="flex-row">
                     <div class="field">
                         <label for="nombreCuenta">Nombre de cuenta</label>
@@ -50,9 +50,9 @@
                     <div class="field ml-2">
                         <label for="tipoCuenta">Tipo</label>
                         <select name="tipoCuenta" id="" class="input">
-                            <option value="1">Ingreso y gasto</option>
-                            <option value="2">Ingreso</option>
-                            <option value="3">Gasto</option>
+                            <option value="IE">Ingreso y gasto</option>
+                            <option value="I">Ingreso</option>
+                            <option value="E">Gasto</option>
                         </select>
                     </div>
                 </div>

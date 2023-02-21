@@ -38,7 +38,7 @@
         </div>
     </header>
     <main class="flex-column ai-center w-100">
-        <form action="" class="my-3">
+        <form action="GestionarEstadoCuentaController?accion=crear" method="post" class="my-3" id="panelEstadoCuenta">
             <label for="mes">Mes</label>
             <input type="number" name="mes" id="" class="input" min="1" max="12" step="1" value="2">
             <label for="anio">Año</label>
@@ -46,9 +46,9 @@
             <input type="submit" value="Generar" class="btn ml-1">
         </form>
         <h1 class="bg-green c-white w-100 p-3 txt-center">Estado de cuenta</h1>
-        <section class="bg-lightgray w-100 p-4 my-4 flex-row jc-center">
-            <div class="col-3 w-80">
-                <div class="p-4 bg-white rounded-3 flex-column shadow mx-2">
+        <section class="bg-lightgray w-100 p-4 my-4 flex-row jc-center d-none-i" id="panelCuentas">
+            <div class="flex-column w-100">
+                <div class="p-4 bg-white rounded-3 flex-column shadow m-2">
                     <div class="flex-row jc-center ai-center">
                         <span class="ml-3 flex-row">
                             <i class="fa-solid fa-arrow-up-long c-darkgreen"></i>
@@ -56,65 +56,42 @@
                         </span>
                         <h4 class="c-darkgreen ml-2">Ingresos y gastos</h4>
                     </div>
-                    <div class="flex-row ai-center">
-                        <h4 class="txt-b mr-2">Banco</h4>
-                        <p>$500</p>
-                    </div>
-                    <div class="flex-row ai-center">
-                        <h4 class="txt-b mr-2">Efectivo</h4>
-                        <p>$50</p>
+                    <div class="" id="panelIngresosGastos">
                     </div>
                 </div>
-                <div class="p-4 bg-white rounded-3 flex-column shadow mx-2">
+                <div class="p-4 bg-white rounded-3 flex-column shadow m-2">
                     <div class="flex-row jc-center">
                         <span class="ml-3">
                             <i class="fa-solid fa-arrow-up-long c-darkgreen"></i>
                         </span>
                         <h4 class="c-darkgreen ml-2">Gastos</h4>
                     </div>
-                    <div class="flex-row ai-center">
-                        <h4 class="txt-b mr-2">Universidad</h4>
-                        <p>-$100</p>
-                    </div>
-                    <div class="flex-row ai-center">
-                        <h4 class="txt-b mr-2">Regalo</h4>
-                        <p>-$50</p>
+                    <div class="" id="panelGastos">
                     </div>
                 </div>
-                <div class="p-4 bg-white rounded-3 flex-column shadow mx-2">
+                <div class="p-4 bg-white rounded-3 flex-column shadow m-2">
                     <div class="flex-row jc-center">
                         <span class="ml-3">
                             <i class="fa-solid fa-arrow-down-long c-darkgreen"></i>
                         </span>
                         <h4 class="c-darkgreen ml-2">Ingresos</h4>
                     </div>
-                    <div class="flex-row ai-center">
-                        <h4 class="txt-b mr-2">Nómina</h4>
-                        <p>$1000</p>
+                    <div class="" id="panelIngresos">
                     </div>
                 </div>
                 
             </div>
+            
+            <div class="d-none-i shadow rounded-3 p-5 m-2 flex-column ai-center w-100 bg-white" id="panelMovimientosUp">
+            	<h2 class="mb-2">Movimientos realizados</h2>
+            	<div id="panelMovimientos" class="w-100">
+	            
+            	</div>        
+        	</div>
+            
         </section>
         
-		<div class="shadow rounded-3 p-5 m-3 flex-column ai-center w-80">
-            <h2 class="mb-2">Movimientos realizados</h2>
-            <div id="panelMovimientos" class="w-100">
-	            <!--div class="w-100 flex-column" >
-	                <div class="flex-row sp-between">
-	                    <div>
-	                        <span class="txt-i txt-b">17/02/2023</span>
-	                        <span>Desde </span>
-	                        <span class="c-darkgreen txt-b">Banco</span>
-	                        <span>hacia </span>
-	                        <span class="c-darkgreen txt-b">Efectivo</span>
-	                    </div>
-	                    <p class="c-darkgreen txt-b ml-2">$1000</p>
-	                </div>
-	                <p class="txt-li">Transferencia entre cuentas</p>
-	            </div-->
-            </div>        
-        </div>
+		
     </main>
     <script src="js/estadocuenta.js" type="module"></script>
 </body>

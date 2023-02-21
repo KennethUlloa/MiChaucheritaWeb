@@ -13,13 +13,13 @@ public class CuentaDAO implements ICuentaDAO {
 	@Override
 	public void create(Cuenta object) {
 		int max = 0;
-		for(Cuenta cuenta:cuentas) {
-			if(max<cuenta.getNumeroCuenta()) {
-				max = cuenta.getNumeroCuenta();
+		for(Cuenta cuenta : cuentas) {
+			if(max < cuenta.getId()) {
+				max = cuenta.getId();
 				
 			}			
 		}
-		object.setNumeroCuenta(max+1);
+		object.setId(max+1);
 		cuentas.add(object);
 		
 	}
@@ -61,7 +61,7 @@ public class CuentaDAO implements ICuentaDAO {
 	@Override
 	public void update(Cuenta object) {
 		for (Cuenta cuenta:cuentas) {
-			if(cuenta.getNumeroCuenta()==object.getNumeroCuenta()) {
+			if(cuenta.getId() == object.getId()) {
 				cuentas.set(cuentas.indexOf(cuenta), object);
 			}
 		}
@@ -70,7 +70,7 @@ public class CuentaDAO implements ICuentaDAO {
 
 	@Override
 	public void delete(Integer id) {
-		cuentas.removeIf(cuenta->cuenta.getNumeroCuenta()==id);
+		cuentas.removeIf(cuenta -> cuenta.getId() == id);
 	}
 
 	@Override

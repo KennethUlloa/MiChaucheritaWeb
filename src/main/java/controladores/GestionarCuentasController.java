@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.cuenta.Cuenta;
 import modelo.cuenta.CuentaDAO;
+import modelo.cuenta.CuentaEgresos;
+import modelo.cuenta.CuentaIngresoEgreso;
+import modelo.cuenta.CuentaIngresos;
+import modelo.cuenta.ICuenta;
 import modelo.cuenta.ICuentaDAO;
 import modelo.persona.Persona;
 import utilities.JSON;
@@ -55,17 +59,29 @@ public class GestionarCuentasController extends HttpServlet {
 		}
 	}
 	
-	private void crear(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void crear(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String nombre = request.getParameter("nombreCuenta");
+		String tipo = request.getParameter("tipoCuenta");
+		Cuenta cuenta = null;
+		switch(tipo) {
+			case "IE": cuenta = new CuentaIngresoEgreso(0, nombre); break;
+			case "I": cuenta = new CuentaIngresos(0, nombre); break;
+			case "E": cuenta = new CuentaEgresos(0, nombre); break;
+		}
+		if(cuenta != null) {
+			cuenta.setPropietario((Persona) request.getSession().getAttribute("usuario"));
+			ICuentaDAO modelo = new CuentaDAO();
+			modelo.create(cuenta);
+		}
 		
+		response.sendRedirect("GestionarCuentasController");
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ICuentaDAO modelo = new CuentaDAO();
 		Persona persona = (Persona) request.getSession().getAttribute("usuario");
-		System.out.println(persona);
 		List<Cuenta> cuentas = modelo.getByPropietario(persona);
-		System.out.println(cuentas);
+		
 		response.setContentType("application/json; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().print(cuentas);

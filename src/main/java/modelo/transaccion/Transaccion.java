@@ -26,6 +26,7 @@ public class Transaccion implements Serializable{
 		this.concepto = concepto;
 		this.monto = monto;
 		this.fecha = fecha;
+		this.realizarTransaccion();
 	}
 
 	public int getId() {

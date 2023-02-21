@@ -37,5 +37,35 @@
                 </a>
         </div>
     </header>
+    <main>
+    	<div class="c-green p-5">
+    		<h1 class="c-darkgreen">Bienvenido, ${sessionScope.usuario.nombre}</h1>
+    	</div>
+    	<div class="bg-lightgray w-100 flex-row jc-center py-5">
+    		<div class="col-3 gap-5 w-80">
+    		<div class="shadow p-5 bg-white rounded-3 c-darkgreen flex-column ai-center">
+    			<a href="GestionarEstadoCuentaController">
+    				<img src="img/estado-financiero.png" alt="icono estado financiero" width="150" height="150" class="filtered"/>
+    			</a>
+    			<h1 class="mt-3 c-darkgreen txt-center">Estado de Cuenta</h1>
+    		</div>
+    		
+    		<div class="shadow p-5 bg-white rounded-3 c-darkgreen flex-column ai-center">
+    			<a href="GestionarMovimientosController">
+    				<img src="img/cuenta-bancaria.png" alt="icono estado financiero" width="150" height="150" class="filtered"/>
+    			</a>
+    			<h1 class="mt-3 c-darkgreen txt-center">Movimientos</h1>
+    		</div>
+    		
+    		<div class="shadow p-5 bg-white rounded-3 c-darkgreen flex-column ai-center">
+    			<a href="GestionarCuentasController">
+    				<img src="img/pagar.png" alt="icono estado financiero" width="150" height="150" class="filtered"/>
+    			</a>
+    			<h1 class="mt-3 c-darkgreen txt-center">Cuentas</h1>
+    		</div>
+    	</div>
+    	</div>
+    </main>
+    <script src="js/inicio.js" type="module"></script>
 </body>
 </html>
