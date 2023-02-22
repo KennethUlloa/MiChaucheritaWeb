@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,12 +20,14 @@ import modelo.cuenta.CuentaDestino;
 import modelo.cuenta.CuentaEgresos;
 import modelo.cuenta.CuentaIngresos;
 import modelo.cuenta.CuentaOrigen;
+import modelo.cuenta.ICuentaDAO;
 import modelo.persona.Persona;
 import modelo.transaccion.ITransaccionDAO;
 import modelo.transaccion.Transaccion;
 import modelo.transaccion.TransaccionDAO;
 import utilities.FiltroTransaccion;
 import utilities.JSON;
+import utilities.VerificadorSesion;
 
 @WebServlet("/GestionarMovimientosController")
 public class GestionarMovimientosController extends HttpServlet {
@@ -79,7 +82,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		
 		//Llamar al modelo
 		LocalDate fechaTransaccion = LocalDate.now();
-		CuentaDAO modeloCuenta = new CuentaDAO();
+		ICuentaDAO modeloCuenta = new CuentaDAO();
 		CuentaOrigen cuentaOrigen = (CuentaOrigen) modeloCuenta.getById(Integer.parseInt(origen));
 		CuentaDestino cuentaDestino= (CuentaDestino) modeloCuenta.getById(Integer.parseInt(destino));
 		Transaccion transaccion = new Transaccion(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
@@ -100,7 +103,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		//Llamar al modelo
 		ITransaccionDAO modelo = new TransaccionDAO(); 
 		List<Transaccion> transacciones = modelo.getAll();
-		if(inicio != null && fin != null) {
+		if((inicio != null && !inicio.equals("")) && (fin != null && !fin.equals(""))) {
 			LocalDate fechaInicio = LocalDate.parse(inicio);
 			LocalDate fechaFin = LocalDate.parse(fin);
 			transacciones = modelo.getByRange(fechaInicio, fechaFin);

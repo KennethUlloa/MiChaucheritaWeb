@@ -10,6 +10,7 @@ fetch(url).then(response => response.json())
 fetch(url2).then(response => response.json())
 .then(data => {
 	data.forEach(cuenta => {
+		console.log(cuenta);
 		switch(cuenta.tipo) {
 			case "IE": 
 				form.elements["origen"].appendChild(createOption(cuenta));

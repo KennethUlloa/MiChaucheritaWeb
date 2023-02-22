@@ -20,6 +20,7 @@ import modelo.transaccion.Transaccion;
 import modelo.transaccion.TransaccionDAO;
 import utilities.DateRange;
 import utilities.FiltroTransaccion;
+import utilities.VerificadorSesion;
 
 /**
  * Servlet implementation class EstadoCuentaController

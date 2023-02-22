@@ -19,6 +19,7 @@ import modelo.cuenta.ICuenta;
 import modelo.cuenta.ICuentaDAO;
 import modelo.persona.Persona;
 import utilities.JSON;
+import utilities.VerificadorSesion;
 
 /**
  * Servlet implementation class GestionarCuentasController
@@ -81,6 +82,7 @@ public class GestionarCuentasController extends HttpServlet {
 		ICuentaDAO modelo = new CuentaDAO();
 		Persona persona = (Persona) request.getSession().getAttribute("usuario");
 		List<Cuenta> cuentas = modelo.getByPropietario(persona);
+		System.out.println(cuentas);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");

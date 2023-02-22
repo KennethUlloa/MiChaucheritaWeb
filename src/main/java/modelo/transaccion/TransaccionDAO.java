@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.cuenta.Cuenta;
 import modelo.cuenta.CuentaDAO;
 import modelo.cuenta.CuentaDestino;
 import modelo.cuenta.CuentaOrigen;
@@ -81,7 +80,7 @@ public class TransaccionDAO implements ITransaccionDAO{
 	}
 
 	@Override
-	public List<Transaccion> getByPropietario(Persona persona) {
+	public List<Transaccion> getByPersona(Persona persona) {
 		return getAll().stream().filter(transaccion -> {
 			CuentaOrigen origen = transaccion.getOrigen(); 
 			CuentaDestino destino = transaccion.getDestino();
