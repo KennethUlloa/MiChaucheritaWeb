@@ -30,11 +30,19 @@
                 </ul>
             </nav>
         </div>
-        <div class="flex-row ai-center">
+        <div class="flex-row ai-center popup-target">
             <h4 class="mr-2">${sessionScope.usuario.nombre}</h4>     
-                <a href="LogOutController" class="">
-                    <i class="fa-solid fa-arrow-right-from-bracket fa-2xl c-darkgreen"></i>
-                </a>
+                
+            <div class="popup">
+            	<div>
+	            	<a href="LogOutController" class="flex-row">
+	            	Salir
+	                    <span class="ml-1">
+	                    	<i class="fa-solid fa-arrow-right-from-bracket fa-lg c-darkgreen"></i>
+	                    </span>
+	                </a>
+            	</div>
+            </div>
         </div>
     </header>
     <main>

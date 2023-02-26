@@ -1,21 +1,20 @@
-package modelo.cuenta;
+package modelo.entidades;
 
 import java.io.Serializable;
 
-import modelo.persona.Persona;
 import utilities.JSON;
 
-public abstract class Cuenta implements Serializable, ICuenta {
+public abstract class AbstractCuenta implements Serializable, ICuenta {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
 	private Persona propietario;
+	private double monto;
 	
-	
-	public Cuenta() {}
+	public AbstractCuenta() {}
 
-	public Cuenta(int id, String nombreCuenta) {
+	public AbstractCuenta(int id, String nombreCuenta) {
 		this.id = id;
 		this.nombre = nombreCuenta;
 	}
@@ -58,6 +57,16 @@ public abstract class Cuenta implements Serializable, ICuenta {
 	@Override
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Override
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+	
+	@Override
+	public double getMonto() {
+		return monto;
 	}
 	
 }

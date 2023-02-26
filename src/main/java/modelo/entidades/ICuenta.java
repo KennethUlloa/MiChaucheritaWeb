@@ -1,6 +1,4 @@
-package modelo.cuenta;
-
-import modelo.persona.Persona;
+package modelo.entidades;
 
 public interface ICuenta {
 	public Persona getPropietario();
@@ -10,5 +8,5 @@ public interface ICuenta {
 	public void setId(int id);
 	public String getNombre();
 	public void setNombre(String nombre);
-	
+	public void setMonto(double monto);
 }

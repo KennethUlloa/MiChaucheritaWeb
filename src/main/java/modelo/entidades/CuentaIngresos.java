@@ -1,11 +1,10 @@
-package modelo.cuenta;
+package modelo.entidades;
 
 import utilities.JSON;
 
-public class CuentaIngresos extends Cuenta implements CuentaOrigen {
+public class CuentaIngresos extends AbstractCuenta {
 
 	private static final long serialVersionUID = 1L;
-	private double ingresos;
 	
 	public CuentaIngresos() {
 		super();
@@ -16,14 +15,13 @@ public class CuentaIngresos extends Cuenta implements CuentaOrigen {
 	}
 
 	@Override
-	public double getMonto() {
-		return ingresos;
+	public void setMonto(double monto) {
+		// TODO Auto-generated method stub
+		super.setMonto(monto);
 	}
 
-	@Override
 	public void registrarSalida(double valor) {
-		ingresos += valor;
-		
+		setMonto(getMonto() + valor);	
 	}
 
 	@Override

@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.cuenta.Cuenta;
-import modelo.cuenta.CuentaDAO;
-import modelo.cuenta.CuentaEgresos;
-import modelo.cuenta.CuentaIngresoEgreso;
-import modelo.cuenta.CuentaIngresos;
-import modelo.cuenta.ICuenta;
-import modelo.cuenta.ICuentaDAO;
-import modelo.persona.Persona;
+import modelo.dao.ICuentaDAO;
+import modelo.entidades.AbstractCuenta;
+import modelo.entidades.CuentaEgresos;
+import modelo.entidades.CuentaIngresoEgreso;
+import modelo.entidades.CuentaIngresos;
+import modelo.entidades.ICuenta;
+import modelo.entidades.Persona;
+import modelo.memoria.CuentaDAO;
 import utilities.JSON;
 import utilities.VerificadorSesion;
 
@@ -63,7 +63,7 @@ public class GestionarCuentasController extends HttpServlet {
 	private void crear(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String nombre = request.getParameter("nombreCuenta");
 		String tipo = request.getParameter("tipoCuenta");
-		Cuenta cuenta = null;
+		AbstractCuenta cuenta = null;
 		switch(tipo) {
 			case "IE": cuenta = new CuentaIngresoEgreso(0, nombre); break;
 			case "I": cuenta = new CuentaIngresos(0, nombre); break;
@@ -81,9 +81,7 @@ public class GestionarCuentasController extends HttpServlet {
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ICuentaDAO modelo = new CuentaDAO();
 		Persona persona = (Persona) request.getSession().getAttribute("usuario");
-		List<Cuenta> cuentas = modelo.getByPropietario(persona);
-		System.out.println(cuentas);
-		
+		List<ICuenta> cuentas = modelo.getByPropietario(persona);
 		response.setContentType("application/json; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().print(cuentas);

@@ -1,8 +1,8 @@
-package modelo.cuenta;
+package modelo.entidades;
 
 import utilities.JSON;
 
-public class CuentaIngresoEgreso extends Cuenta implements CuentaDestino,CuentaOrigen{
+public class CuentaIngresoEgreso extends AbstractCuenta {
 
 	private static final long serialVersionUID = 1L;
 	private double egresos;
@@ -18,11 +18,6 @@ public class CuentaIngresoEgreso extends Cuenta implements CuentaDestino,CuentaO
 	}
 
 	@Override
-	public double getMonto() {
-		return ingresos - egresos;
-	}
-	
-	@Override
 	public String toString() {		
 		JSON json = new JSON();
 		json.add("nombre", this.getNombre());
@@ -32,14 +27,14 @@ public class CuentaIngresoEgreso extends Cuenta implements CuentaDestino,CuentaO
 		return json.toString();
 	}
 
-	@Override
 	public void registrarSalida(double valor) {
 		egresos += valor;
+		setMonto(ingresos - egresos);
 	}
 
-	@Override
 	public void registrarEntrada(double valor) {
 		ingresos += valor;
+		setMonto(ingresos - egresos);
 	}
 
 }

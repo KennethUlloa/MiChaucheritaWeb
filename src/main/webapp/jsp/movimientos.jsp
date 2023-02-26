@@ -30,22 +30,28 @@
                 </ul>
             </nav>
         </div>
-        <div class="flex-row ai-center">
+        <div class="flex-row ai-center popup-target">
             <h4 class="mr-2">${sessionScope.usuario.nombre}</h4>     
-                <a href="LogOutController" class="">
-                    <i class="fa-solid fa-arrow-right-from-bracket fa-2xl c-darkgreen"></i>
-                </a>
-            </i>
+            <div class="popup">
+            	<div>
+            		<a href="LogOutController" class="flex-row">
+	            		Salir
+	            		<span class="ml-1">
+	            			<i class="fa-solid fa-arrow-right-from-bracket fa-lg c-darkgreen"></i>
+	            		</span>
+            		</a>
+            	</div>
+            </div>
         </div>
     </header>
     <main class="w-100 flex-column ai-center p-5">
-        <button class="btn m-2" onclick="mostrar()">+ Movimiento</button>
+        <div class="flex-row">
+        	<button class="btn m-2" id="btnIngreso">+ Ingreso</button>
+        	<button class="btn m-2" id="btnGasto">+ Gasto</button>
+        	<button class="btn m-2" id="btnTraspaso">+ Traspaso</button>
+        </div>
         <form action="GestionarMovimientosController?accion=registrar" method="post" class="shadow rounded-3 p-4 m-3 d-none" id="nuevoMovimientoForm">
-            <div class="flex-row">
-                <div class="field mr-1">
-                    <label for="monto">Monto</label>
-                    <input type="number" name="monto" min="0.0" step="0.01" placeholder="100.50">
-                </div>
+            <div class="col-2-auto w-100 mb-2">
                 <div class="field mr-1">
                     <label for="origen">Cuenta origen</label>
                     <select name="origen" id="" class="input">
@@ -63,9 +69,20 @@
                     </select>
                 </div>
             </div>
+            
+            <div class="flex-row">
+            	<div class="field mr-1">
+                    <label for="monto">Monto</label>
+                    <input type="number" name="monto" min="0.0" step="0.01" placeholder="100.50" required>
+                </div>
+                <div class="field mr-1">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" name="fecha" required>
+                </div>
+            </div>
             <div class="field mt-2">
                 <label for="monto">Concepto</label>
-                <input type="text" name="concepto" placeholder="Descripción del movimiento">
+                <input type="text" name="concepto" placeholder="Descripción del movimiento" required>
             </div>
             <div class="flex-row jc-end mt-2">
                 <input type="submit" value="Guardar" class="btn mr-1">
@@ -82,19 +99,7 @@
         <div class="shadow rounded-3 p-5 m-3 flex-column ai-center w-80">
             <h2 class="mb-2">Movimientos realizados</h2>
             <div id="panelMovimientos" class="w-100">
-	            <!--div class="w-100 flex-column" >
-	                <div class="flex-row sp-between">
-	                    <div>
-	                        <span class="txt-i txt-b">17/02/2023</span>
-	                        <span>Desde </span>
-	                        <span class="c-darkgreen txt-b">Banco</span>
-	                        <span>hacia </span>
-	                        <span class="c-darkgreen txt-b">Efectivo</span>
-	                    </div>
-	                    <p class="c-darkgreen txt-b ml-2">$1000</p>
-	                </div>
-	                <p class="txt-li">Transferencia entre cuentas</p>
-	            </div-->
+	            
             </div>        
         </div>
     </main>

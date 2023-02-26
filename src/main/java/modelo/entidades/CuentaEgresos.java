@@ -1,8 +1,8 @@
-package modelo.cuenta;
+package modelo.entidades;
 
 import utilities.JSON;
 
-public class CuentaEgresos extends Cuenta implements CuentaDestino {
+public class CuentaEgresos extends AbstractCuenta {
 
 	private static final long serialVersionUID = 1L;
 	private double egresos;
@@ -24,15 +24,14 @@ public class CuentaEgresos extends Cuenta implements CuentaDestino {
 		json.add("tipo","E");
 		return json.toString();
 	}
-
+	
 	@Override
 	public double getMonto() {
-		return -this.egresos;
+		return -super.getMonto();
 	}
 
-	@Override
 	public void registrarEntrada(double valor) {
-		egresos += valor;
+		this.egresos += valor;
+		setMonto(this.egresos);
 	}
-	
 }

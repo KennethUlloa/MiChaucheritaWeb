@@ -1,4 +1,4 @@
-import { crearElementoTransaccion } from "./elementos.js";
+import {crearTablaMovimientos} from "./elementos.js";
 import { currencyFormatter } from "./funciones.js";
 
 let form = document.querySelector("#panelEstadoCuenta");
@@ -12,6 +12,7 @@ form.addEventListener('submit', (e) => {
 		body: new URLSearchParams(new FormData(form))
 	}).then(response => response.json())
 	.then(data => {
+		console.log(data);
 		var pCuentasIngresosGastos = document.querySelector("#panelIngresosGastos");
 		var pCuentasIngresos = document.querySelector("#panelIngresos");
 		var pCuentasGastos = document.querySelector("#panelGastos");
@@ -35,9 +36,7 @@ form.addEventListener('submit', (e) => {
 function cargarTransacciones(transacciones) {
 	var panel = document.querySelector("#panelMovimientos");
 	panel.innerHTML = "";
-	transacciones.forEach(transaccion => {
-		panel.appendChild(crearElementoTransaccion(transaccion));
-	})
+	panel.appendChild(crearTablaMovimientos(transacciones));
 }
 
 function cardCuenta(cuenta) {

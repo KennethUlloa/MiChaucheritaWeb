@@ -1,7 +1,10 @@
-package modelo.persona;
+package modelo.memoria;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import modelo.dao.IPersonaDAO;
+import modelo.entidades.Persona;
 
 public class PersonaDAO implements IPersonaDAO{
 	

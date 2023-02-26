@@ -1,24 +1,24 @@
-package modelo.transaccion;
+package modelo.entidades;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import modelo.cuenta.CuentaDestino;
-import modelo.cuenta.CuentaOrigen;
 import utilities.JSON;
 
-public class Transaccion implements Serializable{
+public abstract class Transaccion<O extends ICuenta, D extends ICuenta> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private CuentaOrigen origen;
-	private CuentaDestino destino;
+	private O origen;
+	private D destino;
 	private String concepto;
 	private double monto;
 	private LocalDate fecha;
 	
 	public Transaccion() {}
 	
-	public Transaccion(int id, CuentaOrigen origen, CuentaDestino destino, String concepto, double monto, LocalDate fecha) {
+	
+	
+	public Transaccion(int id, O origen, D destino, String concepto, double monto, LocalDate fecha) {
 		super();
 		this.id = id;
 		this.origen = origen;
@@ -26,8 +26,9 @@ public class Transaccion implements Serializable{
 		this.concepto = concepto;
 		this.monto = monto;
 		this.fecha = fecha;
-		this.realizarTransaccion();
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -37,19 +38,19 @@ public class Transaccion implements Serializable{
 		this.id = id;
 	}
 	
-	public CuentaOrigen getOrigen() {
+	public O getOrigen() {
 		return origen;
 	}
 	
-	public void setOrigen(CuentaOrigen origen) {
+	public void setOrigen(O origen) {
 		this.origen = origen;
 	}
 	
-	public CuentaDestino getDestino() {
+	public D getDestino() {
 		return destino;
 	}
 	
-	public void setDestino(CuentaDestino destino) {
+	public void setDestino(D destino) {
 		this.destino = destino;
 	}
 	
@@ -77,11 +78,6 @@ public class Transaccion implements Serializable{
 		this.fecha = fecha;
 	}
 	
-	public void realizarTransaccion() {
-		origen.registrarSalida(monto);
-		destino.registrarEntrada(monto);
-		
-	}
 
 	@Override
 	public String toString() {

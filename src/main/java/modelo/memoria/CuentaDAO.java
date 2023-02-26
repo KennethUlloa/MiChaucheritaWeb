@@ -1,19 +1,24 @@
-package modelo.cuenta;
+package modelo.memoria;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.persona.IPersonaDAO;
-import modelo.persona.Persona;
-import modelo.persona.PersonaDAO;
+import modelo.dao.ICuentaDAO;
+import modelo.dao.IPersonaDAO;
+import modelo.entidades.AbstractCuenta;
+import modelo.entidades.CuentaEgresos;
+import modelo.entidades.CuentaIngresoEgreso;
+import modelo.entidades.CuentaIngresos;
+import modelo.entidades.ICuenta;
+import modelo.entidades.Persona;
 
 public class CuentaDAO implements ICuentaDAO {
-	private static List<Cuenta> cuentas = null;
+	private static List<ICuenta> cuentas = null;
 
 	@Override
-	public void create(Cuenta object) {
+	public void create(ICuenta object) {
 		int max = 0;
-		for(Cuenta cuenta : cuentas) {
+		for(ICuenta cuenta : cuentas) {
 			if(max < cuenta.getId()) {
 				max = cuenta.getId();
 				
@@ -25,8 +30,8 @@ public class CuentaDAO implements ICuentaDAO {
 	}
 
 	@Override
-	public Cuenta getById(Integer id) {
-		for (Cuenta cuenta : getAll()) {
+	public ICuenta getById(Integer id) {
+		for (ICuenta cuenta : getAll()) {
 			if(cuenta.getId()==id) {
 				return cuenta;
 			}
@@ -35,11 +40,11 @@ public class CuentaDAO implements ICuentaDAO {
 	}
 
 	@Override
-	public List<Cuenta> getAll() {
+	public List<ICuenta> getAll() {
 		IPersonaDAO personas = new PersonaDAO();
 		if(cuentas == null) {
-			cuentas = new ArrayList<Cuenta>();
-			Cuenta cuenta = new CuentaIngresos(1,"Nómina");
+			cuentas = new ArrayList<ICuenta>();
+			ICuenta cuenta = new CuentaIngresos(1,"Nómina");
 			cuenta.setPropietario(personas.getById("kenneth"));
 			cuentas.add(cuenta);
 			cuenta = new CuentaEgresos(2,"Regalo");
@@ -59,8 +64,8 @@ public class CuentaDAO implements ICuentaDAO {
 	}
 
 	@Override
-	public void update(Cuenta object) {
-		for (Cuenta cuenta:cuentas) {
+	public void update(ICuenta object) {
+		for (ICuenta cuenta: getAll()) {
 			if(cuenta.getId() == object.getId()) {
 				cuentas.set(cuentas.indexOf(cuenta), object);
 			}
@@ -74,10 +79,23 @@ public class CuentaDAO implements ICuentaDAO {
 	}
 
 	@Override
-	public List<Cuenta> getByPropietario(Persona persona) {
+	public List<ICuenta> getByPropietario(Persona persona) {
 		return getAll().stream().filter(cuenta -> cuenta.getPropietario().equals(persona)).toList();
 	}
 
-		
-	
+	@Override
+	public <T extends ICuenta> List<T> getAllByType(Class<T> c) {
+		return getAll().stream().filter(cuenta -> c.isInstance(cuenta)).map(cuenta -> c.cast(cuenta)).toList();
+	}
+
+	@Override
+	public <T extends ICuenta> List<T> getAllByPropietarioAndType(Persona propietario, Class<T> c) {
+		return getAll().stream().filter(cuenta -> c.isInstance(cuenta) && cuenta.getPropietario().equals(propietario)).map(cuenta -> c.cast(cuenta)).toList();
+	}
+
+	@Override
+	public <T extends ICuenta> T getByIdAndType(Integer id, Class<T> c) {
+		return c.cast(getById(id));
+	}
+
 }

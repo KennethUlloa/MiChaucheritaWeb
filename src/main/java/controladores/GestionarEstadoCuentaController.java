@@ -1,10 +1,6 @@
 package controladores;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,13 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.estadocuenta.EstadoCuenta;
-import modelo.persona.Persona;
-import modelo.transaccion.ITransaccionDAO;
-import modelo.transaccion.Transaccion;
-import modelo.transaccion.TransaccionDAO;
+import modelo.dao.ITransaccionDAO;
+import modelo.entidades.EstadoCuenta;
+import modelo.entidades.Persona;
+import modelo.entidades.Transaccion;
+import modelo.memoria.TransaccionDAO;
 import utilities.DateRange;
-import utilities.FiltroTransaccion;
 import utilities.VerificadorSesion;
 
 /**
@@ -64,11 +59,10 @@ public class GestionarEstadoCuentaController extends HttpServlet {
 		String mes = request.getParameter("mes");
 		String anio = request.getParameter("anio");
 		//
+		Persona persona = (Persona)request.getSession().getAttribute("usuario");
 		DateRange range = new DateRange(Integer.parseInt(mes), Integer.parseInt(anio));
 		ITransaccionDAO modelo = new TransaccionDAO();
-		List<Transaccion> transacciones = modelo.getByRange(range.getInicio(),range.getFin());
-		Persona persona = (Persona)request.getSession().getAttribute("usuario");
-		transacciones = transacciones.stream().filter(new FiltroTransaccion(persona)).toList();
+		List<Transaccion> transacciones = modelo.getByDateRangeAndPersona(range.getInicio(),range.getFin(), persona);
 		EstadoCuenta estadoCuenta = new EstadoCuenta(transacciones, persona);
 		//
 		response.setContentType("application/json; charset=UTF-8");
