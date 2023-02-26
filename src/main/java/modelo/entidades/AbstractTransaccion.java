@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import utilities.JSON;
 
-public abstract class Transaccion<O extends ICuenta, D extends ICuenta> implements Serializable{
+public abstract class AbstractTransaccion<O extends ICuenta, D extends ICuenta> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private O origen;
@@ -14,11 +14,11 @@ public abstract class Transaccion<O extends ICuenta, D extends ICuenta> implemen
 	private double monto;
 	private LocalDate fecha;
 	
-	public Transaccion() {}
+	public AbstractTransaccion() {}
 	
 	
 	
-	public Transaccion(int id, O origen, D destino, String concepto, double monto, LocalDate fecha) {
+	public AbstractTransaccion(int id, O origen, D destino, String concepto, double monto, LocalDate fecha) {
 		super();
 		this.id = id;
 		this.origen = origen;
@@ -27,7 +27,6 @@ public abstract class Transaccion<O extends ICuenta, D extends ICuenta> implemen
 		this.monto = monto;
 		this.fecha = fecha;
 	}
-
 
 
 	public int getId() {

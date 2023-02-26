@@ -9,28 +9,6 @@ let form = document.querySelector("#nuevoMovimientoForm");
 fetch(url).then(response => response.json())
 .then(data => cargarTransacciones(data));
 
-/*
-fetch(urlCuentas).then(response => response.json())
-.then(data => {
-	data.forEach(cuenta => {
-		console.log(cuenta);
-		switch(cuenta.tipo) {
-			case "IE": 
-				form.elements["origen"].appendChild(createOption(cuenta));
-				form.elements["destino"].appendChild(createOption(cuenta));
-				break;
-			case "E": 
-				form.elements["destino"].appendChild(createOption(cuenta));
-				break;
-			case "I": 
-				form.elements["origen"].appendChild(createOption(cuenta));
-				break;
-		}
-	})
-})*/
-
-
-
 document.querySelector("#btnIngreso").addEventListener("click", mostrarIngresos, false);
 document.querySelector("#btnGasto").addEventListener("click", mostrarGastos, false);
 document.querySelector("#btnTraspaso").addEventListener("click", mostrarTraspaso, false);
@@ -39,10 +17,6 @@ function cargarTransacciones(transacciones) {
 	var panel = document.querySelector("#panelMovimientos");
 	panel.innerHTML = "";
 	panel.appendChild(crearTablaMovimientos(transacciones));
-	/*transacciones.forEach(transaccion => {
-		panel.appendChild(crearElementoTransaccion(transaccion));
-	})*/
-	
 }
 
 
@@ -133,6 +107,12 @@ function loadTransacciones() {
 
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
+	
+	if(form.elements["origen"].value === form.elements["destino"].value) {
+		alert("No se puede realizar un movimiento entre la misma cuenta");
+		return;
+	}
+	
 	fetch(form.action, {
 		method: form.method,
 		body: new URLSearchParams(new FormData(form))

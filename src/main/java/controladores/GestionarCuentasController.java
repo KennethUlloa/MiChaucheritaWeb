@@ -21,9 +21,6 @@ import modelo.memoria.CuentaDAO;
 import utilities.JSON;
 import utilities.VerificadorSesion;
 
-/**
- * Servlet implementation class GestionarCuentasController
- */
 @WebServlet("/GestionarCuentasController")
 public class GestionarCuentasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

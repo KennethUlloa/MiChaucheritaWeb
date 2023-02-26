@@ -22,8 +22,9 @@ import modelo.entidades.CuentaEgresos;
 import modelo.entidades.CuentaIngresoEgreso;
 import modelo.entidades.CuentaIngresos;
 import modelo.entidades.CuentaOrigen;
+import modelo.entidades.ICuenta;
 import modelo.entidades.Persona;
-import modelo.entidades.Transaccion;
+import modelo.entidades.AbstractTransaccion;
 import modelo.entidades.TransaccionEgreso;
 import modelo.entidades.TransaccionIngreso;
 import modelo.entidades.TransaccionTraspaso;
@@ -90,7 +91,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		ICuentaDAO modeloCuenta = new CuentaDAO();
 		CuentaIngresoEgreso cuentaOrigen = modeloCuenta.getByIdAndType(Integer.parseInt(origen), CuentaIngresoEgreso.class);
 		CuentaIngresoEgreso cuentaDestino = modeloCuenta.getByIdAndType(Integer.parseInt(destino), CuentaIngresoEgreso.class);
-		Transaccion transaccion = new TransaccionTraspaso(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
+		TransaccionTraspaso transaccion = new TransaccionTraspaso(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
 		ITransaccionDAO modeloTransaccion = new TransaccionDAO();
 		modeloTransaccion.create(transaccion);
 		
@@ -117,7 +118,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		ICuentaDAO modeloCuenta = new CuentaDAO();
 		CuentaIngresoEgreso cuentaOrigen = modeloCuenta.getByIdAndType(Integer.parseInt(origen), CuentaIngresoEgreso.class);
 		CuentaEgresos cuentaDestino = modeloCuenta.getByIdAndType(Integer.parseInt(destino), CuentaEgresos.class);
-		Transaccion transaccion = new TransaccionEgreso(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
+		TransaccionEgreso transaccion = new TransaccionEgreso(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
 		ITransaccionDAO modeloTransaccion = new TransaccionDAO();
 		modeloTransaccion.create(transaccion);
 		
@@ -145,7 +146,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		ICuentaDAO modeloCuenta = new CuentaDAO();
 		CuentaIngresos cuentaOrigen = modeloCuenta.getByIdAndType(Integer.parseInt(origen), CuentaIngresos.class);
 		CuentaIngresoEgreso cuentaDestino = modeloCuenta.getByIdAndType(Integer.parseInt(destino), CuentaIngresoEgreso.class);
-		Transaccion transaccion = new TransaccionIngreso(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
+		TransaccionIngreso transaccion = new TransaccionIngreso(0, cuentaOrigen, cuentaDestino, concepto, Double.parseDouble(monto), fechaTransaccion);
 		ITransaccionDAO modeloTransaccion = new TransaccionDAO();
 		modeloTransaccion.create(transaccion);
 		
@@ -171,7 +172,7 @@ public class GestionarMovimientosController extends HttpServlet {
 		//Llamar al modelo
 		Persona persona = (Persona) request.getSession().getAttribute("usuario");
 		ITransaccionDAO modelo = new TransaccionDAO(); 
-		List<Transaccion> transacciones = modelo.getByPersona(persona);
+		List<AbstractTransaccion<?,?>> transacciones = modelo.getByPersona(persona);
 		if((inicio != null && !inicio.equals("")) && (fin != null && !fin.equals(""))) {
 			LocalDate fechaInicio = LocalDate.parse(inicio);
 			LocalDate fechaFin = LocalDate.parse(fin);

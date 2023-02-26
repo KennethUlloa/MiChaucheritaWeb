@@ -2,7 +2,7 @@ package modelo.entidades;
 
 import java.time.LocalDate;
 
-public class TransaccionTraspaso extends Transaccion<CuentaIngresoEgreso, CuentaIngresoEgreso>{
+public class TransaccionTraspaso extends AbstractTransaccion<CuentaIngresoEgreso, CuentaIngresoEgreso>{
 
 	private static final long serialVersionUID = 1L;
 

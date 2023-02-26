@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.entidades.Persona;
-import modelo.entidades.Transaccion;
+import modelo.entidades.AbstractTransaccion;
+import modelo.entidades.ICuenta;
 
-public interface ITransaccionDAO extends DAO<Transaccion, Integer>{
-	public List<Transaccion> getByDateRange(LocalDate inicio, LocalDate fin);
-	public List<Transaccion> getByPersona(Persona persona);
-	public List<Transaccion> getByDateRangeAndPersona(LocalDate inicio, LocalDate fin, Persona persona);
+public interface ITransaccionDAO extends DAO<AbstractTransaccion<?,?>, Integer>{
+	public List<AbstractTransaccion<?,?>> getByDateRange(LocalDate inicio, LocalDate fin);
+	public List<AbstractTransaccion<?,?>> getByPersona(Persona persona);
+	public List<AbstractTransaccion<?,?>> getByDateRangeAndPersona(LocalDate inicio, LocalDate fin, Persona persona);
 }

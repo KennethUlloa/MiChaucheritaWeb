@@ -15,7 +15,7 @@ public class EstadoCuenta implements Serializable{
 	private List<CuentaIngresos> cuentasIngreso;
 	private List<CuentaEgresos> cuentasEgreso;
 	private List<CuentaIngresoEgreso> cuentasIngresoEgreso;
-	private List<Transaccion> transacciones;
+	private List<AbstractTransaccion<?,?>> transacciones;
 	
 	public EstadoCuenta() {
 		cuentasIngresoEgreso = new ArrayList<>();
@@ -23,7 +23,7 @@ public class EstadoCuenta implements Serializable{
 		cuentasEgreso = new ArrayList<>();
 	}
 	
-	public EstadoCuenta(List<Transaccion> transacciones, Persona persona) {
+	public EstadoCuenta(List<AbstractTransaccion<?,?>> transacciones, Persona persona) {
 		this();
 		//Estruturas donde se van a guardar las cuentas que obtenga
 		this.transacciones = transacciones;
@@ -42,7 +42,7 @@ public class EstadoCuenta implements Serializable{
 		
 		
 		//Se realiza la sumarizacion de cada cuenta con la traccion registrada
-		for(Transaccion t : transacciones) {
+		for(AbstractTransaccion<?,?> t : transacciones) {
 			CuentaIngresos origen = mapCuentasIngresos.get(t.getOrigen().getId());
 			CuentaEgresos destino = mapCuentasEgresos.get(t.getDestino().getId());
 			
@@ -89,11 +89,11 @@ public class EstadoCuenta implements Serializable{
 		this.cuentasIngresoEgreso = cuentasIngresoEgreso;
 	}
 	
-	public List<Transaccion> getTransacciones() {
+	public List<AbstractTransaccion<?,?>> getTransacciones() {
 		return transacciones;
 	}
 
-	public void setTransacciones(List<Transaccion> transacciones) {
+	public void setTransacciones(List<AbstractTransaccion<?,?>> transacciones) {
 		this.transacciones = transacciones;
 	}
 

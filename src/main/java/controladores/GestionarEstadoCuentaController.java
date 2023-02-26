@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.ITransaccionDAO;
 import modelo.entidades.EstadoCuenta;
+import modelo.entidades.ICuenta;
 import modelo.entidades.Persona;
-import modelo.entidades.Transaccion;
+import modelo.entidades.AbstractTransaccion;
 import modelo.memoria.TransaccionDAO;
 import utilities.DateRange;
 import utilities.VerificadorSesion;
@@ -62,7 +63,7 @@ public class GestionarEstadoCuentaController extends HttpServlet {
 		Persona persona = (Persona)request.getSession().getAttribute("usuario");
 		DateRange range = new DateRange(Integer.parseInt(mes), Integer.parseInt(anio));
 		ITransaccionDAO modelo = new TransaccionDAO();
-		List<Transaccion> transacciones = modelo.getByDateRangeAndPersona(range.getInicio(),range.getFin(), persona);
+		List<AbstractTransaccion<?,?>> transacciones = modelo.getByDateRangeAndPersona(range.getInicio(),range.getFin(), persona);
 		EstadoCuenta estadoCuenta = new EstadoCuenta(transacciones, persona);
 		//
 		response.setContentType("application/json; charset=UTF-8");

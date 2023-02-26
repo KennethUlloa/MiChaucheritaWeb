@@ -12,18 +12,18 @@ import modelo.entidades.CuentaIngresos;
 import modelo.entidades.CuentaOrigen;
 import modelo.entidades.ICuenta;
 import modelo.entidades.Persona;
-import modelo.entidades.Transaccion;
+import modelo.entidades.AbstractTransaccion;
 import modelo.entidades.TransaccionEgreso;
 import modelo.entidades.TransaccionIngreso;
 import modelo.entidades.TransaccionTraspaso;
 
-public class TransaccionDAO implements ITransaccionDAO{
-	private static List<Transaccion> transacciones;
+public class TransaccionDAO implements ITransaccionDAO {
+	private static List<AbstractTransaccion<?,?>> transacciones;
 	
 	@Override
-	public void create(Transaccion transaccion) {
+	public void create(AbstractTransaccion<?, ?> transaccion) {
 		int maxId = 0;
-		for(Transaccion t : getAll()) {
+		for(AbstractTransaccion<?, ?> t : getAll()) {
 			if (t.getId() > maxId) {
 				maxId = t.getId();
 			}
@@ -33,13 +33,13 @@ public class TransaccionDAO implements ITransaccionDAO{
 	}
 
 	@Override
-	public Transaccion getById(Integer id) {
+	public AbstractTransaccion<?, ?> getById(Integer id) {
 		// no aplica por regla de negocio
 		return null;
 	}
 
 	@Override
-	public List<Transaccion> getAll() {
+	public List<AbstractTransaccion<?,?>> getAll() {
 		if(transacciones == null) {
 			CuentaDAO cd = new CuentaDAO();			
 			transacciones = new ArrayList<>();
@@ -64,7 +64,7 @@ public class TransaccionDAO implements ITransaccionDAO{
 	}
 
 	@Override
-	public void update(Transaccion object) {
+	public void update(AbstractTransaccion<?, ?> object) {
 		// no aplica por regla de negocio
 		
 	}
@@ -76,9 +76,9 @@ public class TransaccionDAO implements ITransaccionDAO{
 	}
 
 	@Override
-	public List<Transaccion> getByDateRange(LocalDate inicio, LocalDate fin) {
-		List<Transaccion> rangoTransacciones = new ArrayList<>(); 
-		for(Transaccion t : getAll()) {
+	public List<AbstractTransaccion<?,?>> getByDateRange(LocalDate inicio, LocalDate fin) {
+		List<AbstractTransaccion<?,?>> rangoTransacciones = new ArrayList<>(); 
+		for(AbstractTransaccion<?, ?> t : getAll()) {
 			if(t.getFecha().isEqual(inicio) || t.getFecha().isEqual(fin) || 
 					(t.getFecha().isAfter(inicio) && t.getFecha().isBefore(fin))) {
 				rangoTransacciones.add(t);
@@ -88,7 +88,7 @@ public class TransaccionDAO implements ITransaccionDAO{
 	}
 
 	@Override
-	public List<Transaccion> getByPersona(Persona persona) {
+	public List<AbstractTransaccion<?,?>> getByPersona(Persona persona) {
 		return getAll().stream().filter(transaccion -> {
 			ICuenta origen = transaccion.getOrigen(); 
 			ICuenta destino = transaccion.getDestino();
@@ -97,7 +97,7 @@ public class TransaccionDAO implements ITransaccionDAO{
 	}
 
 	@Override
-	public List<Transaccion> getByDateRangeAndPersona(LocalDate inicio, LocalDate fin, Persona persona) {
+	public List<AbstractTransaccion<?,?>> getByDateRangeAndPersona(LocalDate inicio, LocalDate fin, Persona persona) {
 		return getByDateRange(inicio, fin).stream().filter(t -> {
 			return t.getOrigen().getPropietario().equals(persona) && t.getDestino().getPropietario().equals(persona);
 			}).toList();
