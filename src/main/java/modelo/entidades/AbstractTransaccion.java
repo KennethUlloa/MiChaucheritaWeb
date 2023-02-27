@@ -3,22 +3,43 @@ package modelo.entidades;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import utilities.JSON;
 
+@Entity 
 public abstract class AbstractTransaccion<O extends ICuenta, D extends ICuenta> implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue (strategy=GenerationType.AUTO)
 	private int id;
+	
+	@OneToOne
+	@Column (name="origen")
 	private O origen;
+	
+	@OneToOne
+	@Column (name="destino")
 	private D destino;
+	
+	@Column (name="concepto")
 	private String concepto;
+	
+	@Column (name="monto")
 	private double monto;
+	
+	@Column (name="fecha")
 	private LocalDate fecha;
 	
-	public AbstractTransaccion() {}
+	public Transaccion() {}
 	
-	
-	
-	public AbstractTransaccion(int id, O origen, D destino, String concepto, double monto, LocalDate fecha) {
+	public Transaccion(int id, O origen, D destino, String concepto, double monto, LocalDate fecha) {
 		super();
 		this.id = id;
 		this.origen = origen;
@@ -27,7 +48,6 @@ public abstract class AbstractTransaccion<O extends ICuenta, D extends ICuenta> 
 		this.monto = monto;
 		this.fecha = fecha;
 	}
-
 
 	public int getId() {
 		return id;
@@ -76,7 +96,6 @@ public abstract class AbstractTransaccion<O extends ICuenta, D extends ICuenta> 
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-	
 
 	@Override
 	public String toString() {
